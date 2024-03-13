@@ -78,9 +78,11 @@ This small difference has its impact at a technical level since docker, unlike V
 
 The key differences would be as follows:
 
-![docker vs vm](static/docker_vs_vm.png).
-
-![wrong os](static/wrong_os.png)
+| DIFFERENCES |DOCKER|VIRTUAL MACHINE|
+|---|---|---|
+| SIZE IMAGE  | MB   | GB  |
+| STARING MACHINE | Seconds | Minutes |
+| COMPATIBLE | LINUX | All OS |
 
 However, docker has done an update called __Docker desktop__ for Windows and Mac using Hypervisor layer (lightweight Linux distribution) that makes possible to run docker containers in these operative systems.
 
