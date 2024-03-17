@@ -1,6 +1,6 @@
-[__HOME__](../README.md)
+[__HOME__](../../README.md)
 
-> [GOTO NEXT >](./1_installation.md)
+> [GOTO NEXT >](./1-installation.md)
 ---
 # Introduction
 

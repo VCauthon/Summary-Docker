@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>My Form</title>
+  </head>
+  <body>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name(size=20) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    {% if last_name %}
+      <p>Last entered name: {{ last_name }}</p>
+    {% endif %}
+    <img src="{{ url_for('static', filename='yara.jpg') }}" alt="Example Image" />
+  </body>
+</html>

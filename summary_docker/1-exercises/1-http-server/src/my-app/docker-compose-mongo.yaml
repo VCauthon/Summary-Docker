@@ -1,0 +1,34 @@
+version: '3'  # Version of docker-compose
+services:
+  mongo-db:
+      image: mongo
+      ports:
+        - 27017:27017
+      environment:
+          - MONGO_INITDB_ROOT_USERNAME=root
+          - MONGO_INITDB_ROOT_PASSWORD=root
+      volumes:
+        - mongo-data:/data/db  # Persist data in a volume
+  mongo-express:
+      image: mongo-express
+      depends_on:
+        - mongo-db
+      ports:
+        - 8081:8081
+      environment:
+          - ME_CONFIG_OPTIONS_EDITORTHEME=dracula
+          - ME_CONFIG_MONGODB_SERVER=mongo-db
+          - ME_CONFIG_BASICAUTH_USERNAME=web
+          - ME_CONFIG_BASICAUTH_PASSWORD=web
+          - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+          - ME_CONFIG_MONGODB_ADMINPASSWORD=root
+  my-app:
+      build: .
+      depends_on:
+        - mongo-db
+      ports:
+        - 5000:5000
+
+volumes:  # Volumes for persisting data
+  mongo-data:
+    driver: local
