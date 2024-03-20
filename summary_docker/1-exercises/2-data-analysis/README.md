@@ -1,6 +1,6 @@
 [__HOME__](../../../README.md)
 
-> [<- PREVIOUS EXERCISE](../1-http-server/README.md)  [NEXT EXERCISE ->](../2-data-visualization/README.md)
+> [<- PREVIOUS EXERCISE](../1-http-server/README.md) __|__ [NEXT EXERCISE ->](../2-data-visualization/README.md)
 ---
 ## Data Analysis with Pandas in Docker
 

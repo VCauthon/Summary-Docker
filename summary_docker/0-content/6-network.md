@@ -1,6 +1,6 @@
 [__HOME__](../../README.md)
 
-> [<- PREVIOUS CHAPTER](./5-debugging.md) [NEXT CHAPTER ->](./7-docker-compose.md)
+> [<- PREVIOUS CHAPTER](./5-debugging.md) __|__ [NEXT CHAPTER ->](./7-docker-compose.md)
 ---
 # Introduction
 

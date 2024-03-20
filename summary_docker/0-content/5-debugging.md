@@ -1,6 +1,6 @@
 [__HOME__](../../README.md)
 
-> [<- PREVIOUS CHAPTER](./4-images.md) [NEXT CHAPTER ->](./6-network.md)
+> [<- PREVIOUS CHAPTER](./4-images.md) __|__ [NEXT CHAPTER ->](./6-network.md)
 ---
 # Introduction
 

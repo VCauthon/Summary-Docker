@@ -1,6 +1,6 @@
 [__HOME__](../../README.md)
 
-> [<- PREVIOUS CHAPTER](./1-installation.md) [NEXT CHAPTER ->](./3-containers.md)
+> [<- PREVIOUS CHAPTER](./1-installation.md) __|__ [NEXT CHAPTER ->](./3-containers.md)
 ---
 # Introduction
 
