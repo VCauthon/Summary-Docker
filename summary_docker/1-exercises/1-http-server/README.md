@@ -1,6 +1,6 @@
 [__HOME__](../../../README.md)
 
-> [GOTO NEXT>](../2-data-analysis/README.md)
+> [NEXT EXERCISE ->](../2-data-visualization/README.md)
 ---
 
 # HTTP server

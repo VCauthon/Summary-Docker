@@ -1,6 +1,6 @@
 [HOME](../README.md)
 
-> [< GO BACK](./7-docker-compose.md)
+> [<- PREVIOUS CHAPTER](./7-docker-compose.md)
 ---
 
 # Introduction

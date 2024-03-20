@@ -1,6 +1,6 @@
 [__HOME__](../../README.md)
 
-> [GOTO NEXT >](./1-installation.md)
+> [NEXT CHAPTER ->](./1-installation.md)
 ---
 # Introduction
 
