@@ -60,7 +60,7 @@ The most important parameters are:
 
 Let's run the command to create the container and confirm that it has been created correctly.
 
-Checking container](static/network_mongo_container.png)
+[Checking container](static/network_mongo_container.png)
 
 Now let's create a mongon-express container inside the same network where the mongo container is located (and with the necessary parameters so that both services know how to communicate).
 
