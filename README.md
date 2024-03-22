@@ -16,6 +16,8 @@
     9. [Volumes](./summary_docker/0-content/8-volumes.md)
 - __Exercises:__
     - [http server](./summary_docker/1-exercises/1-http-server/README.md)
+    - [Data analysis](./summary_docker/1-exercises/2-data-analysis/README.md)
+    - [Data visualization (PENDING)](./summary_docker/1-exercises/3-data-visualization/README.md)
 
 ## Acknowledgments
 - [TechWorld with Nana - Docker Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=pg19Z8LL06w)
