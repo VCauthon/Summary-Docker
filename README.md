@@ -24,3 +24,4 @@
 - [TechWorld with Nana - Docker Tutorial for Beginners](https://www.youtube.com/watch?v=3c-iBn73dDE)
 - [Official Docker Documentation](https://docs.docker.com/)
 - [Docker Hub](https://hub.docker.com/)
+- [Terraform: Up and Running](https://www.oreilly.com/library/view/terraform-up-and/9781098116736/)
