@@ -5,23 +5,24 @@
 
 ## Content
 - __Theory:__
-    1. [Introduction](./summary_docker/0-content/0-introduction.md)
-    2. [Installation](./summary_docker/0-content/1-installation.md)
-    3. [Image repository](./summary_docker/0-content/2-image-repository.md)
-    4. [Containers](./summary_docker/0-content/3-containers.md)
-    5. [Images](./summary_docker/0-content/4-images.md)
-    6. [Debugging](./summary_docker/0-content/5-debugging.md)
-    7. [Container network](./summary_docker/0-content/6-network.md)
-    8. [Docker compose](./summary_docker/0-content/7-docker-compose.md)
-    9. [Volumes](./summary_docker/0-content/8-volumes.md)
+    1. [Introduction](./src/docs/0-introduction.md)
+    2. [Installation](./src/docs/1-installation.md)
+    3. [Image repository](./src/docs/2-image-repository.md)
+    4. [Containers](./src/docs/3-containers.md)
+    5. [Images](./src/docs/4-images.md)
+    6. [Debugging](./src/docs/5-debugging.md)
+    7. [Container network](./src/docs/6-network.md)
+    8. [Docker compose](./src/docs/7-docker-compose.md)
+    9. [Volumes](./src/docs/8-volumes.md)
 - __Exercises:__
-    - [http server](./summary_docker/1-exercises/1-http-server/README.md)
-    - [Data analysis](./summary_docker/1-exercises/2-data-analysis/README.md)
-    - [Data visualization (PENDING)](./summary_docker/1-exercises/3-data-visualization/README.md)
+    - [http server](./src/exercises/1-http-server/README.md)
+    - [Data analysis](./src/exercises/2-data-analysis/README.md)
+    - [Data visualization (PENDING)](./src/exercises/3-data-visualization/README.md)
 
-## Acknowledgments
+## Sources
 - [TechWorld with Nana - Docker Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=pg19Z8LL06w)
 - [TechWorld with Nana - Docker Tutorial for Beginners](https://www.youtube.com/watch?v=3c-iBn73dDE)
+- [Docker Deep Dive](https://www.amazon.es/Docker-Deep-Dive-Nigel-Poulton/dp/1916585256/ref=sr_1_1?adgrpid=59660793271&hvadid=712240779580&hvdev=c&hvlocphy=9181150&hvnetw=g&hvqmt=e&hvrand=14177040242523783112&hvtargid=kwd-375282831066&hydadcr=6381_2379727&mcid=5f2113140c003203aee8a04ca519ca64&sr=8-1)
 - [Official Docker Documentation](https://docs.docker.com/)
 - [Docker Hub](https://hub.docker.com/)
 - [Terraform: Up and Running](https://www.oreilly.com/library/view/terraform-up-and/9781098116736/)
