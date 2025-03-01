@@ -55,6 +55,7 @@ This document serves as a quick reference guide for common Docker commands and c
     - `-p {HOST_PORT}:{HOST_CONTAINER}`: Sets a port binding between the host and the container
     - `--name 'CONTAINER_NAME'`: Give a concrete name to the created container
     - `--network 'NETWORK_NAME`: Creates a container inside a docker network
+    - `-it`: Make the container interactive and to attach your shell to the container's terminal.
 - Rerun:
     - `docker start {CONTAINER_ID/CONTAINER_NAME}`
 - Delete:
