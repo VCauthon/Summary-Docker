@@ -4,7 +4,7 @@ This document serves as a quick reference guide for common Docker commands and c
 
 #### The main topics that we will cover are:
 - [Listing current local docker content](#listing-current-local-docker-content)
-- [Downloading imagees from Docker](#downloading-images-from-docker)
+- [Downloading images from Docker](#downloading-images-from-docker)
 - [Building images](#building-images)
 - [Building containers](#building-containers)
 - [Working with containers](#working-with-containers)
@@ -43,7 +43,19 @@ This document serves as a quick reference guide for common Docker commands and c
         - `docker rm {CONTAINER_ID}`
     - __Images:__
         - `docker rmi {IMAGE_ID}`
+        - `docker rmi (docker images -q) -f`: Deletes all images
         - __NOTE__: The containers from this image have to be deleted before deleting the image
+- __Listing the manifest list:__
+    - `docker buildx imagetools inspect alpine`: Get the full manifest list
+    - `docker manifest inspect {image:tag} | grep 'architecture\|os'`: Cropped version
+
+## Query
+- `docker ... (docker images -q)`: Returns all the ID from the images
+
+
+## Security:
+- `docker scout quickview {image:tag}`: See an overview of all vulnerabilities of an image
+- `docker scout cves {image:tag}`: Get more detailed information including remediation advice
 
 ## Building containers:
 
