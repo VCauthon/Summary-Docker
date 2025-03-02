@@ -31,6 +31,9 @@ This document serves as a quick reference guide for common Docker commands and c
 
 ## Building images:
 
+- __Pulling an image:__
+    - `docker pull {image}`
+
 - __Creating an image:__
     - `docker build .`
     - Added features:
@@ -66,11 +69,14 @@ This document serves as a quick reference guide for common Docker commands and c
 - Showing logs:
     - `docker logs {CONTAINER_ID/CONTAINER_NAME}`
     - The container ID can be retrieved from the `docker ps` command
-    - 
-- Opening a session with a container:
+- Start a container but with attach it a session:
+    - `docker run -it {CONTAINER_ID} /bin/bash`
+- Opening a new session with a __running__ container:
     - `docker exec -it {CONTAINER_ID/CONTAINER_NAME} /bin/bash`
         - `-it`: Creates a terminal with the docker
         - `/bin/bash`: Starts the shell from the container (not all images have a shell!)
+- Attaching your session to the current session of your container:
+    - `docker attach {CONTAINER_ID}`
 - Network:
     - `docker network`
         - `ls`: List all the existing networks
