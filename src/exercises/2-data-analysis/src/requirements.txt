@@ -1,2 +1,0 @@
-pandas==2.1.4
-watchdog==3.0.0
