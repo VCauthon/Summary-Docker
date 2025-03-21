@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¯\_(ツ)_/¯</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            text-align: center;
+            background: white;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Webpages</th>
+            <th>Counter</th>
+        </tr>
+        <tr>
+            <td><a target="_blank" onclick="incrementCounter(this); return true;" href="https://www.reddit.com">Reddit</a></td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" onclick="incrementCounter(this); return true;" href="https://news.ycombinator.com/">HackerNews</a></td>
+            <td>0</td>
+        </tr>
+    </table>
+
+    <script>
+        function incrementCounter(linkElement) {
+            const cell = linkElement.parentNode;
+            const counterCell = cell.nextElementSibling;
+
+            let currentCount = parseInt(counterCell.textContent);
+            counterCell.textContent = currentCount + 1;
+        }
+    </script>
+</body>
+</html>
