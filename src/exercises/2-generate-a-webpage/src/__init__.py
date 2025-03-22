@@ -18,5 +18,6 @@ def create_app():
         template_folder=str(CURRENT_PATH.joinpath("templates")))
 
     app.register_blueprint(bp)
-
     return app
+
+app = create_app()

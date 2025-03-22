@@ -1,11 +1,19 @@
 
 # Basic dummy Webpage 
 
-Crear una imagen de docker con una página web.
+Create a docker image with a webpage.
 
-En esta página web se mostrará una tabla donde en la primera columna habran una serie de enlaces y en la segunda un contador.
+This webpage will show a table where in the first column there will be a series of links and in the second column a counter.
 
-La página web contara con un script en JavaScript para incrementar el numero del contador en función del enlace seleccionado.
+The web page will have a JavaScript script to increase the counter number depending on the selected link.
 
+---
 
+# Solution
 
+The image code can be found [here](./src/__init__.py) and is published in the joeyratt repository as joeyratt/webpage.
+
+Through the following command the image can be pulled up:
+```bash
+docker run -p 5000:5000 joeyratt/webpage:latest
+```
