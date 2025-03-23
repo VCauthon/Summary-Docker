@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¯\_(ツ)_/¯</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            text-align: center;
+            background: white;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Webpages</th>
+            <th>Counter</th>
+        </tr>
+        <tr>
+            <td><a target="_blank" onclick="incrementCounter('reddit', this); return true;" href="https://www.reddit.com">Reddit</a></td>
+            <td id="count_reddit">{{ count_reddit }}</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" onclick="incrementCounter('hacker_news', this); return true;" href="https://news.ycombinator.com/">HackerNews</a></td>
+            <td id="count_hacker_news">{{ count_hacker_news }}</td>
+        </tr>
+    </table>
+
+    <script>
+        function incrementCounter(site, linkElement) {
+            fetch('/increment_counter/' + site, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                const counterCell = document.getElementById('count_' + site);
+                counterCell.textContent = data.count;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
