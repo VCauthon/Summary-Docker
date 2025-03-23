@@ -1,0 +1,23 @@
+services:
+  webpage:
+    build: ../3-webpage-communicates-with-redis/.
+    environment:
+      REDIS_HOST: "redis-db"
+    ports:
+      - 5000:5000
+    networks:
+      - webpage-redis-network
+    volumes:
+      - type: volume
+        source: volumes-count
+        target: /app
+  redis-db:
+    image: "redis/redis-stack:latest"
+    networks:
+      - webpage-redis-network
+  
+networks:
+  webpage-redis-network:
+
+volumes:
+  volumes-count:
