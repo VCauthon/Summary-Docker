@@ -29,9 +29,21 @@ At the time of the writing the OCI maintains three standards called specs:
 - [The runtime-spec](https://github.com/opencontainers/runtime-spec): Develops specifications for standards on Operating System process and application containers
 - [The distribution-spec](https://github.com/opencontainers/distribution-spec): Defines an API protocol to facilitate and standardize the distribution of content
 
-#### The CNCF
+#### [__The CNCF__](https://www.cncf.io/)
 
-#### The Moby Project
+It was founded in 2015 with the goal of _"...advancing container technologies... and making cloud native computing ubiquitous"_. Instead of creating and maintaining container-related specifications, the CNCF host important project such as Kubernetes, containerd, Notary, Prometheus, Cilium, and lots more.
+
+When we say the CNCF host these projects we mean it provides a space, structure, and support for projects to grow and mature. Fore example, all CNCF projects pass through the following three phases or stages:
+- Sandbox: Gives support to new ideas and projects to
+- Incubating: Gives the needed time to be production ready products
+- Graduated: They are ready for production adn are guaranteed to have strong governance.
+
+#### [__The Moby Project__](https://mobyproject.org/)
+
+Place for developers to build specialized tools for building container platforms.
+
+Platform builders can pick the specific Moby tools they need to build their container platform. They can even compose their platforms from a mix of Moby tools, in-house tools, and tools from other projects.
+
 
 ---
 > [<- PREVIOUS CHAPTER](./1-introduction.md) __|__ [NEXT CHAPTER ->](./3-theory.md)
