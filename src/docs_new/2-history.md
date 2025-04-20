@@ -5,9 +5,32 @@
 
 
 ## INDEX:
-- 
+
 
 ---
+
+### OS-Virtualization
+
+OS-level virtualization is an operating system (OS) virtualization paradigm in which the kernel allows the existence of multiple isolated user space instances, including:
+- Containers (LXC, Solaris Containers, AIX WPARs, HP-UX SRP Containers, Docker, Podman)
+- Zones (Solaris Containers)
+- Virtual private servers (OpenVZ)
+- Partitions
+- Virtual environments (VEs)
+- Virtual kernels (DragonFly BSD)
+- Jails (FreeBSD jail and chroot)
+
+Such instances may look like real computers from the point of view of programs running in them.
+
+A computer program running on an ordinary operating system can see all resources connected devices, files and folders, network shares, CPU power, quantifiable hardware capabilities) of that computer. Programs running inside a container can only see the container's contents and devices assigned to the container.
+
+On Unix-like operating systems, this feature can be seen as an advanced implementation of the standard chroot mechanism, which changes the apparent root folder for the current running process and its children. In addition to isolation mechanisms, the kernel often provides resource-management features to limit the impact of one container's activities on other containers. Linux containers are all based on the virtualization, isolation, and resource management mechanisms provided by the Linux kernel, notably:
+- __namespaces__: Feature of the Linux kernel that partition kernel resources such that one set of processes sees one set of resources, while another set of processes sees a different set of resources.
+- __cgroups__: Is a Linux kernel feature that limits, accounts for, and isolates the resource usage (CPU, memory, disk I/O, etc.[1]) of a collection of processes
+
+Although the word container most commonly refers to OS-level virtualization, it is sometimes used to refer to fuller virtual machines operating in varying degrees of concert with the host OS, such as Microsoft's Hyper-V containers.
+
+> NOTES: For an overview of virtualization since 1960, see [Timeline of virtualization technologies](https://en.m.wikipedia.org/wiki/Timeline_of_virtualization_technologies).
 
 ### Where docker comes from
 
