@@ -5,34 +5,57 @@
 
 
 ## INDEX:
-
+# TODO: Add index
 
 ---
 
-### OS-Virtualization
+### How docker came to be?
 
-OS-level virtualization is an operating system (OS) virtualization paradigm in which the kernel allows the existence of multiple isolated user space instances, including:
-- Containers (LXC, Solaris Containers, AIX WPARs, HP-UX SRP Containers, Docker, Podman)
-- Zones (Solaris Containers)
-- Virtual private servers (OpenVZ)
-- Partitions
-- Virtual environments (VEs)
-- Virtual kernels (DragonFly BSD)
-- Jails (FreeBSD jail and chroot)
+Docker uses a system of OS-level virtualization that allows the kernel to isolate into multiple spaces.
+
+This paradigm includes the following types of isolation:
+
+- `Containers` (LXC, Solaris Containers, AIX WPARs, HP-UX SRP Containers, Docker, Podman)
+- `Zones` (Solaris Containers)
+- `Virtual` private servers (OpenVZ)
+- `Partitions`
+- `Virtual environments` (VEs)
+- `Virtual kernels` (DragonFly BSD)
+- `Jails` (FreeBSD jail and chroot)
 
 Such instances may look like real computers from the point of view of programs running in them.
 
 A computer program running on an ordinary operating system can see all resources connected devices, files and folders, network shares, CPU power, quantifiable hardware capabilities) of that computer. Programs running inside a container can only see the container's contents and devices assigned to the container.
 
-On Unix-like operating systems, this feature can be seen as an advanced implementation of the standard chroot mechanism, which changes the apparent root folder for the current running process and its children. In addition to isolation mechanisms, the kernel often provides resource-management features to limit the impact of one container's activities on other containers. Linux containers are all based on the virtualization, isolation, and resource management mechanisms provided by the Linux kernel, notably:
-- __namespaces__: Feature of the Linux kernel that partition kernel resources such that one set of processes sees one set of resources, while another set of processes sees a different set of resources.
-- __cgroups__: Is a Linux kernel feature that limits, accounts for, and isolates the resource usage (CPU, memory, disk I/O, etc.[1]) of a collection of processes
+#### How to achieve process isolation in a container?
+
+On Unix-like operating systems, this feature can be seen as an advanced implementation of the standard chroot mechanism, which changes the apparent root folder for the current running process and its children. In addition to isolation mechanisms, the kernel often provides resource-management features to limit the impact of one container's activities on other containers.
+
+Linux containers are all based on the virtualization, isolation, and resource management mechanisms provided by the Linux kernel, notably:
+
+- `namespaces`: Feature of the Linux kernel that partition kernel resources such that one set of processes sees one set of resources, while another set of processes sees a different set of resources.
+- `cgroups`: Is a Linux kernel feature that limits, accounts for, and isolates the resource usage (CPU, memory, disk I/O, etc.[1]) of a collection of processes
 
 Although the word container most commonly refers to OS-level virtualization, it is sometimes used to refer to fuller virtual machines operating in varying degrees of concert with the host OS, such as Microsoft's Hyper-V containers.
 
 > NOTES: For an overview of virtualization since 1960, see [Timeline of virtualization technologies](https://en.m.wikipedia.org/wiki/Timeline_of_virtualization_technologies).
 
-### Where docker comes from
+---
+
+On ordinary operating systems for personal computers, a computer program can see (even though it might not be able to access) all the system's resources.
+
+They include:
+- Hardware capabilities that can be employed, such as the CPU and the network connection.
+- Data that can be read or written, such as files, folders and network shares.
+- Connected peripherals it can interact with, such as webcam, printer, scanner, or fax.
+
+The operating system may be able to allow or deny access to such resources based on which program requests them and the user account in the context in which it runs. The operating system may also hide those resources, so that when the computer program enumerates them, they do not appear in the enumeration results. Nevertheless, from a programming point of view, the computer program has interacted with those resources and the operating system has managed an act of interaction.
+
+__With operating-system-virtualization, or containerization, it is possible to run programs within containers, to which only parts of these resources are allocated__. A program expecting to see the whole computer, once run inside a container, can only see the allocated resources and believes them to be all that is available. Several containers can be created on each operating system, to each of which a subset of the computer's resources is allocated. Each container may contain any number of computer programs. These programs may run concurrently or separately, and may even interact with one another.
+
+Containerization has similarities to application virtualization: In the latter, only one computer program is placed in an isolated container and the isolation applies to file system only.
+
+---
 
 ### Container-related standards
 
