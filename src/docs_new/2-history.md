@@ -5,7 +5,13 @@
 
 
 ## INDEX:
-# TODO: Add index
+
+- [How docker came to be?](#how-docker-came-to-be)
+    - [How to achieve process isolation in a container?](#how-to-achieve-process-isolation-in-a-container)
+- [Initiatives to promote and standardize containers](#initiatives-to-promote-and-standardize-containers)
+    - [The Open Container Initiative](#the-open-container-initiative)
+    - [The CNCF](#the-cncf)
+    - [The Moby Project](#the-moby-project)
 
 ---
 
@@ -25,7 +31,7 @@ This paradigm includes the following types of isolation:
 
 Such instances may look like real computers from the point of view of programs running in them.
 
-A computer program running on an ordinary operating system can see all resources connected devices, files and folders, network shares, CPU power, quantifiable hardware capabilities) of that computer. Programs running inside a container can only see the container's contents and devices assigned to the container.
+A computer program running on an ordinary operating system can see all resources connected devices, files and folders, network shares, CPU power, quantifiable hardware capabilities of that computer. Programs running inside a container can only see the container's contents and devices assigned to the container.
 
 #### How to achieve process isolation in a container?
 
@@ -40,8 +46,6 @@ Although the word container most commonly refers to OS-level virtualization, it 
 
 > NOTES: For an overview of virtualization since 1960, see [Timeline of virtualization technologies](https://en.m.wikipedia.org/wiki/Timeline_of_virtualization_technologies).
 
----
-
 On ordinary operating systems for personal computers, a computer program can see (even though it might not be able to access) all the system's resources.
 
 They include:
@@ -51,17 +55,19 @@ They include:
 
 The operating system may be able to allow or deny access to such resources based on which program requests them and the user account in the context in which it runs. The operating system may also hide those resources, so that when the computer program enumerates them, they do not appear in the enumeration results. Nevertheless, from a programming point of view, the computer program has interacted with those resources and the operating system has managed an act of interaction.
 
+![image](../docs/static/os_level_virtualization.png)
+
 __With operating-system-virtualization, or containerization, it is possible to run programs within containers, to which only parts of these resources are allocated__. A program expecting to see the whole computer, once run inside a container, can only see the allocated resources and believes them to be all that is available. Several containers can be created on each operating system, to each of which a subset of the computer's resources is allocated. Each container may contain any number of computer programs. These programs may run concurrently or separately, and may even interact with one another.
 
 Containerization has similarities to application virtualization: In the latter, only one computer program is placed in an isolated container and the isolation applies to file system only.
 
 ---
 
-### Container-related standards
+### Initiatives to promote and standardize containers
 
-#### [__The OCI__](https://opencontainers.org/)
+#### [__The Open Container Initiative__](https://opencontainers.org/)
 
-Governance council responsible for low-level container-related standards.
+The Open Container Initiative is an open governance structure for the express purpose of creating open industry standards around container formats and runtimes.
 
 Some history about OCI:
 - It operates from the Linux Foundation and was founded in the early days of the container ecosystem when some of the people at a company called CoreOS didn't like the way docker was dominating the ecosystem.
@@ -77,7 +83,7 @@ At the time of the writing the OCI maintains three standards called specs:
 
 #### [__The CNCF__](https://www.cncf.io/)
 
-It was founded in 2015 with the goal of _"...advancing container technologies... and making cloud native computing ubiquitous"_. Instead of creating and maintaining container-related specifications, the CNCF host important project such as Kubernetes, containerd, Notary, Prometheus, Cilium, and lots more.
+It was founded in 2015 with the goal of _"...advancing container technologies... and making cloud native computing ubiquitous"_. Instead of creating and maintaining container-related specifications, the CNCF host important project such as `Kubernetes`, `containerd`, `Notary`, `Prometheus`, `Cilium`, and lots more.
 
 When we say the CNCF host these projects we mean it provides a space, structure, and support for projects to grow and mature. Fore example, all CNCF projects pass through the following three phases or stages:
 - Sandbox: Gives support to new ideas and projects to
@@ -90,6 +96,6 @@ Place for developers to build specialized tools for building container platforms
 
 Platform builders can pick the specific Moby tools they need to build their container platform. They can even compose their platforms from a mix of Moby tools, in-house tools, and tools from other projects.
 
-
 ---
+
 > [<- PREVIOUS CHAPTER](./1-introduction.md) __|__ [NEXT CHAPTER ->](./3-theory.md)
