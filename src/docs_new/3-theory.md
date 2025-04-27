@@ -3,9 +3,23 @@
 > [<- PREVIOUS CHAPTER](./2-history.md) __|__ [NEXT CHAPTER ->](./4-containers.md)
 ---
 
-
 ## INDEX:
-- 
+- [Differences between VM and Containers](#differences-between-vm-and-containers)
+- [Docker engine](#docker-engine)
+- [Communicating with the engine](#communicating-with-the-engine)
+- [Images](#images)
+  - [Layers](#layers)
+  - [Registries](#registries)
+    - [Local](#local)
+    - [Remote](#remote)
+    - [Image naming, tagging and unofficial registries](#image-naming-tagging-and-unofficial-registries)
+    - [Multiple tags](#multiple-tags)
+- [Building images](#building-images)
+  - [Image and layers](#image-and-layers)
+  - [Adding layers](#adding-layers)
+  - [Multi-architecture](#multi-architecture)
+    - [Building images for other architectures than your own local PC](#building-images-for-other-architectures-than-your-own-local-pc)
+  - [Vulnerability scanning with Docker Scout](#vulnerability-scanning-with-docker-scout)
 
 ---
 
