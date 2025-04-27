@@ -21,7 +21,7 @@ Docker aims to make it easy to build, ship and run applications. We call this _c
 
 This flow can be summarized into the following diagram:
 
-![image](./static/0_introduction/deploy_flow.png)
+![image](../docs/static/0_introduction/deploy_flow.png)
 
 ## Publishing an image into the DockerHub
 
@@ -31,7 +31,7 @@ To do this, we need to use a registry. There are several, but we are going to us
 
 Once the account has been generated, we must create a repository where the different cowsays images will be registered.
 
-![image](./static/0_introduction/create_repository.png)
+![image](../docs/static/0_introduction/create_repository.png)
 
 Once we have generated our repository we can go back to our original task, i.e. public cowsay image. To do this we need to log in to Docker Hub via `docker login`.
 
