@@ -4,7 +4,11 @@
 ---
 
 ## INDEX:
-- 
+- [Containerize flow](#containerize-flow)
+- [Publishing an image into the DockerHub](#publishing-an-image-into-the-dockerhub)
+- [Technical stuff about build](#technical-stuff-about-build)
+- [Keywords into the Dockerfile](#keywords-into-the-dockerfile)
+- [Moving to production with multi-stage builds](#moving-to-production-with-multi-stage-builds)
 
 ---
 
