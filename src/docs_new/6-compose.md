@@ -61,7 +61,7 @@ The objective of this project can be achieved by defining the following microser
 
 This project would look like this:
 
-- ![image](./static/0_introduction/diagram_build_done.png)
+- ![image](../docs/static/0_introduction/diagram_build_done.png)
 
 Now, through [exercise 1](../exercises/1-generate-a-redis-instance/README.md) and [exercise 2](../exercises/2-generate-a-webpage/README.md) you must adapt the webpage to communicate with Redis and register the accesses.
 
@@ -115,8 +115,6 @@ The commands to be highlighted on the compose CLI itself are the following:
 - `docker compose ps`: List each container in the compose app.
 - `docker compose down`: Will stop and delete a running compose app.
 
-
-
 #### Creating the own compose file
 
 When you deploy the app, you'll use the docker compose command to send the compose.yaml file to Docker. Docker will create the counter-net network and the counter-vol volume and use the Dockerfile to build an OCI image fot eh webpage service. The docker tells Docker to copy the code from the app folder into the image.
@@ -124,8 +122,6 @@ When you deploy the app, you'll use the docker compose command to send the compo
 Docker then starts the webpage, mounts the volume, and connects to the network. It also starts a container for the redis service and connects that to the same network.
 
 In [this exercise](../exercises/4-compose/README.md) you will create a compose.yaml that defines the solution.
-
-
 
 ---
 > [<- PREVIOUS CHAPTER](./5-images.md) __|__ [NEXT CHAPTER ->](./7-swarm.md)
