@@ -42,7 +42,7 @@ In the container model, you power on the same server and an OS boots and claims 
 
 You then tell Docker to run the app in the container.
 
-![image](../docs/static/0_introduction/the_swarm.png)
+![image](../docs/static/3-theory/the_swarm.png)
 
 > VM Tax, one of the biggest problems with the virtual machine model is that you need to install an OS on every VM - every OS consumes CPU, RAM, and storage and take a relative long time to boot. __Containers get around all of this by sharing a single OS on the host they're running on__.
 
@@ -56,7 +56,7 @@ At high level, there are two majors parts to the Docker platform:
 - __The CLI (client)__: The CLI is the familiar docker command-line tool for deploying and managing containers. It converts simple commands into API request and sends them to the engine.
 - __The engine (server)__: Comprises all the service-side components that run and manage containers.
 
-- ![image](../docs/static/0_introduction/cli_engine.png)
+- ![image](../docs/static/3-theory/cli_engine.png)
 
 From the image, and making more focus on the docker engine we can detect the following components:
 - __containerd__: Lifecycle management from all containers created 
@@ -80,7 +80,7 @@ The daemon receives the request, interprets it as a request to create a new cont
 The container is stared as a child process of runc, and __as soon as the container starts, runc exits__.
 
 This can be summarized with the following image:
-- ![image](../docs/static/0_introduction/execution_process.png)
+- ![image](../docs/static/3-theory/execution_process.png)
 
 Decoupling the container creation and management from the Docker daemon and implementing it in containerd and runc makes it possible to stop, restart, and even update the daemon without impacting running containers.
 
@@ -98,7 +98,7 @@ An image is a read-only package containing everything you need to run an applica
 
 The image is read-only in this relationship, but each container is read-write. Docker accomplishes this by creating a thin read-write layer for each container and placing it on top of the shared image.
 
-![image](../docs/static/0_introduction/container_rw_image.png)
+![image](../docs/static/3-theory/container_rw_image.png)
 
 Each of this read-write layers are owned by the container. This allows the containers to have their own individuality as each one manages its own layers.
 
@@ -112,7 +112,7 @@ Images are made by stacking independent _layers_ and __representing them as a si
 
 We 've already said that images are like stopped containers. You can even stop a container and create a new one from it. With this in mind, images are `build-time` (static blueprint containing the app) constructs, whereas containers are `run-time` (active instances of the image) constructs.
 
-- ![image](../docs/static/0_introduction/images_containers.png)
+- ![image](../docs/static/3-theory/images_containers.png)
 
 Containers are designed to run a single application or microservice. As such, they should only contain application code and dependencies. You should not include nonessentials such as build tools or troubleshooting tools.
 
@@ -234,19 +234,19 @@ All docker images start with a __base layer__, and every time you add new conten
 
 Consider the following oversimplified example of building a simple Python application. Your corporate policy mandates all applications bo built on top of the official Ubuntu 24:04 image. This means the official Ubuntu 24:04 image will be the base layer for this app. Installing Python will add a second layer, and your application source code will add a third. The final image will have three layers, as shown in the following image.
 
-- ![image](../docs/static/0_introduction/stack_images.png)
+- ![image](../docs/static/3-theory/stack_images.png)
 
 > Remember that this is an oversimplified example
 
 Its important to understand that an image is the combination of all layers stacked in the order they were built.
 
-- ![image](../docs/static/0_introduction/image_with_2_layers.png)
+- ![image](../docs/static/3-theory/image_with_2_layers.png)
 
 Its important to note also that an image and layers and independent. This means that they are stored as independent objects. __The image is just metadata identifying the required layers and explaining how to stack them__.
 
 If a new layer is been added into the last image and this layer edits a file from other layers this one will override it.
 
-- ![image](../docs/static/0_introduction/image_with_3_layers.png)
+- ![image](../docs/static/3-theory/image_with_3_layers.png)
 
 #### Multi-architecture
 
@@ -281,7 +281,7 @@ Manifests:
 
 From this output we can guess the following:
 
-- ![image](../docs/static/0_introduction/multi_architecture_image.png)
+- ![image](../docs/static/3-theory/multi_architecture_image.png)
 
 The command `inspect` also helps you to see all the architectures supported by a concrete image.
 

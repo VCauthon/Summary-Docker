@@ -55,7 +55,7 @@ They include:
 
 The operating system may be able to allow or deny access to such resources based on which program requests them and the user account in the context in which it runs. The operating system may also hide those resources, so that when the computer program enumerates them, they do not appear in the enumeration results. Nevertheless, from a programming point of view, the computer program has interacted with those resources and the operating system has managed an act of interaction.
 
-![image](../docs/static/os_level_virtualization.png)
+![image](../docs/static/2-history/os_level_virtualization.png)
 
 __With operating-system-virtualization, or containerization, it is possible to run programs within containers, to which only parts of these resources are allocated__. A program expecting to see the whole computer, once run inside a container, can only see the allocated resources and believes them to be all that is available. Several containers can be created on each operating system, to each of which a subset of the computer's resources is allocated. Each container may contain any number of computer programs. These programs may run concurrently or separately, and may even interact with one another.
 
