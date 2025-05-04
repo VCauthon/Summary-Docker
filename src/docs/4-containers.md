@@ -18,7 +18,7 @@ Containers are run-time instances of images, and you can start one or more conta
 
 You can think of an image like a frozen VM. __Each time you generate an instance of this image a separate container is generated__.
 
-![image](../docs/static/0_introduction/image_equal_container.png)
+![image](../docs/static/4-containers/image_equal_container.png)
 
 Based on the graphic we can say that the containers: container1, container2 and container3. They are independent instances of the image on which they have been generated. When we say independent is because each container contains its files, its configuration and these changes will persist in the future until we do not delete the container itself.
 
