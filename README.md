@@ -28,6 +28,7 @@
 - [Terraform: Up and Running](https://www.oreilly.com/library/view/terraform-up-and/9781098116736/)
 - [Wikipedia OS-level virtualization](https://en.m.wikipedia.org/wiki/OS-level_virtualization)
 - [Programacionymas](https://programacionymas.com/blog/docker-diferencia-entrypoint-cmd)
+- [Docker swarm with virtual machines using multipass](https://dev.to/mattdark/docker-swarm-with-virtual-machines-using-multipass-39b0)
 
 # TODO: Update the readme
 # TODO: Move the files from new to docs
