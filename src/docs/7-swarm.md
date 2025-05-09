@@ -209,5 +209,107 @@ If we take into account the above explanation we can correct why one of the prac
 
 In the case of cluster isolation, neither side will be able to have a majority to define a valid leader and modify the status of its cluster.
 
+#### Locking a swarm
+
+Despite all of Swarm's security features, restarting an old manager or restoring an old backup can potentially compromise your cluster. For example, a malicious actor with access to an old manager node may be able to re-join it to the swarm and gain unwanted access.
+
+Fortunately, you can use Swarm's autolock feature to force restarted managers __to present a key before being admitted back into the swarm__.
+
+You can autolock new swarms at build time by passing the `--autolock` flag to the docker `swarm init command`. For existing swarms, you can autolock them with the `docker swarm update` command
+
+Here is an example of the output locking our own cluster:
+```bash
+docker swarm update --autolock
+Swarm updated.
+To unlock a swarm manager after it restarts, run the `docker swarm unlock`
+command and provide the following key:
+
+    SWMKEY-1-Llcid7CmlGQYMK+z0CoRiHBbEyWcUXyROjRNb4ObxNQ
+
+Remember to store this key in a password manager, since without it you
+will not be able to restart the manager.
+```
+
+Keep safe that token. Because if a manager is been restarted and needs to rejoin to the swarm it will have to provide that TOKEN.
+
+#### Dedicated manager nodes
+
+By default, Swarm __runs user applications on workers and managers__. However, you may want to configure your production swarm clusters to only run user applications on workers. This allows managers to focus exclusively on control-plane duties.
+
+Run the following command on any manager to prevent it from running user applications. __You'll need to use the names of your managers, and you'll need to run it on all managers if you want to force user applications to run only on workers__.
+
+```bash
+docker node update --availability drain manager1
+```
+
+### Deploying an manage an app on swarm
+
+Swarm nodes can run regular containers, but they can also run enhanced containers called services. Each service takes a single container definition and augments it with cloud-native features such as self-healing, scaling, and automated rollouts and rollbacks.
+
+In this section, you'll deploy a simple web server as a swarm service an see how to scale it, perform rollouts, and delete it.
+
+Swarm lets you create and manage services in two ways:
+- __Imperatively__: This means that it uses the command line
+- __Declaratively__: This means with a Compose file
+
+The correct way its declaratively because it defines a file on which actions can be declared and replicated however it will be seen both approaches.
+
+#### Example imperatively
+
+In this example it will be used the image already [loaded in the exercise 2](../exercises/2-generate-a-webpage/README.md) to create a service.
+
+To accomplish that execute the following commands in the manager:
+```bash
+multipass shell manager1
+docker service create --name web-fe \
+    -p 5000:5000 \
+    --replicas 5 \
+    joeyratt/webpage:latest
+```
+
+This is the result of the output:
+```bash
+ubuntu@manager1:~$ docker service create --name web-fe \
+    -p 5000:5000 \
+    --replicas 5 \
+    joeyratt/webpage:latest
+d9vjcml3dr0iavdfb9gff4xps
+overall progress: 5 out of 5 tasks 
+1/5: running   [==================================================>] 
+2/5: running   [==================================================>] 
+3/5: running   [==================================================>] 
+4/5: running   [==================================================>] 
+5/5: running   [==================================================>] 
+verify: Service d9vjcml3dr0iavdfb9gff4xps converged 
+```
+
+If we have a similar results it can be stated that:
+- The service `web-fe` has been created
+- Every swarm node exposes the port 5000 for each replica
+- There are created 5 replicas (containers) to supply the demand of this service 
+
+The last statement can be confirmed if we get inside the worker1 and list the running containers:
+```bash
+docker ps
+CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS         PORTS                                                             NAMES
+74d3ef990ba7   joeyratt/webpage:latest   "python3 -m flask --…"   2 minutes ago   Up 2 minutes                                                                     web-fe.2.oeyvfh7ag10c5idm7qy4xvas0
+6126195dec37   joeyratt/webpage:latest   "python3 -m flask --…"   2 minutes ago   Up 2 minutes                                                                     web-fe.3.t6imh8h7u00t2mqh5tynfi0l9
+856d29261236   joeyratt/webpage:latest   "python3 -m flask --…"   2 minutes ago   Up 2 minutes                                                                     web-fe.4.z25f55wgxklqnp9sj8fi0c5zc
+a0a8f430c43c   joeyratt/webpage:latest   "python3 -m flask --…"   2 minutes ago   Up 2 minutes                                                                     web-fe.5.zowe7mxpnxgav29rvpdk965o3
+d5cea5672cb0   joeyratt/webpage:latest   "python3 -m flask --…"   2 minutes ago   Up 2 minutes                                                                     web-fe.1.vsngxuzydllj7wzwafxbjczq8
+fabd9e47f458   portainer/portainer-ce    "/portainer"             2 hours ago     Up 2 hours     8000/tcp, 9443/tcp, 0.0.0.0:9000->9000/tcp, [::]:9000->9000/tcp   portainer
+```
+
+If we look back, exercise 2 created a web page. This means that the web-fe service created in the swarm is a web page. We will be able to access it from the browser if we launch the request to one of the IPs of the virtual machines in multipass.
+
+- ![image](./static/7-swarm/accessing-web-fe.png)
+
+##### Notes about the desired state
+
+Even if the action is been done imperatively the stated is saved in the cluster store. __Swarm will run reconciliation loop that constantly compares the observed state of the cluster with the desired state__. When the two state matches, the world is a happy place, and no further action is needed. When they don't match, Swarm takes action to bring the observed state into line with desired state. 
+
+For example, if a worker hosting one fo the five replicas fails, the observed state of the cluster will drop from 5 replicas to 4 and no longer match the desired state of 5. As soon as the swarm observes the difference, it will start a new replica to bring the observed state back in line with desired state.
+
+
 ---
 > [<- PREVIOUS CHAPTER](./6-compose.md) __|__ [NEXT CHAPTER ->](./8-stack.md)
