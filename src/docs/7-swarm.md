@@ -232,6 +232,66 @@ will not be able to restart the manager.
 
 Keep safe that token. Because if a manager is been restarted and needs to rejoin to the swarm it will have to provide that TOKEN.
 
+Once this command is been executed all your manager nodes that are restarted won't be able to access the swarm unless the swarm is unlock from each node.
+
+Here is an example where the swarm is unlock by a worker:
+```bash
+docker swarm unlock SWMKEY-1-Llcid7CmlGQYMK+z0CoRiHBbEyWcUXyROjRNb4ObxNQ
+```
+
+#### Services
+
+The functionalities that are exposed from a SWARM are known as services.
+
+The following aspects are defined in a service:
+- Which image will be used to create containers
+- How many replicas (containers) will have to be erected to meet the demand for the service.
+- On which ports the service will be exposed
+- What to do when a replica no longer provides the expected response.
+- What to do when demand is higher than expected.
+- And many more points
+
+If you notice, the characteristics of a service are the same as those provided by cloud services, i.e. whatever you do, it will always have a response from the software used.
+
+You can get more detail of a service raised through the following command:
+```bash
+# List all existing services
+docker service ls
+# Retrieve more details about a concrete service
+docker service inspect --pretty $(service-name) 
+# NOTE: Pretty its just a flag to show the results in a more readable format instead of JSON
+```
+
+##### Replicated vs global services
+
+Swarm has two modes for deploying replicas to nodes:
+- __Replicated (default)__: Deploys as many replicas as you need and attempts to distribute them evenly across available nodes.
+- __Global__: Deploys a single replica on every available node in the swarm
+
+> Both modes respect node availability and will only deploy replicas to eligible nodes. For example, if you don't allow your swarm to deploy applications to managers, both modes will only deploy to workers
+
+To enable one or other you have to define with the flag `--mode` it when creating a service.
+
+##### Scaling services
+
+Another powerful feature of services is the ability to scale them up and down by adding or removing replicas.
+
+Assume business is booming and your're experiencing double the number of requests to your web front-end. 
+
+You can scale the number of replicas with the following prompt:
+```bash
+docker service scale $(service-name)=$(number-of-replicas)
+```
+
+##### Deleting services
+
+Running the following command will remove the service from the swarm. This means that the apps that the services containers won't be longer available.
+
+This can be done with the following command:
+```bash
+docker service rm $(service-name)
+```
+
 #### Dedicated manager nodes
 
 By default, Swarm __runs user applications on workers and managers__. However, you may want to configure your production swarm clusters to only run user applications on workers. This allows managers to focus exclusively on control-plane duties.
@@ -241,6 +301,57 @@ Run the following command on any manager to prevent it from running user applica
 ```bash
 docker node update --availability drain manager1
 ```
+
+#### The desired state
+
+Even if the action is been done imperatively the stated is saved in the cluster store. __Swarm will run reconciliation loop that constantly compares the observed state of the cluster with the desired state__. When the two state matches, the world is a happy place, and no further action is needed. When they don't match, Swarm takes action to bring the observed state into line with desired state. 
+
+For example, if a worker hosting one fo the five replicas fails, the observed state of the cluster will drop from 5 replicas to 4 and no longer match the desired state of 5. As soon as the swarm observes the difference, it will start a new replica to bring the observed state back in line with desired state.
+
+#### Rollouts
+
+Application updates ar a fact of life, and for the longest time they were painful. I've personally lost more than enough weekends to major application updates and I've no intention of doing it again.
+
+Fortunately, tanks to Docker services, updating well-designed microservices apps is easy.
+
+> __NOTE__: We use terms like rollouts, updates, and rolling updates to mean the same thing. That is updating a live application.
+
+Swarm manages it all by itself when updating a service.
+
+For example, lets say that we want to change the image used by a service.
+```bash
+# Service created
+docker service create --name dummy \
+    -p 5000:5000 \
+    --replicas 5 \
+    joeyratt/webpage:latest
+```
+```bash
+# Updating the service
+docker service update \
+    --image joeyratt/webpage:v2.0
+    --update-parallelism 2 \
+    --update-delay 20s \
+    dummy
+```
+
+When executing this update swarm will remove each of the old replicas keeping one alive until the rollout is finish. From the update prompt there are the following things that have to be taken into account:
+- `--update-parallelism`: Only 2 rask will be updated at the same time
+- `--update-delay`: After a batch is been done wait 20 seconds before doing the next task
+
+Swarm will waits for the new tasks to become healthy before shutting down the old ones.
+
+#### Service logs
+
+You can inspect a service' logs with the `docker service logs $(service-name)` command. It gathers the logs from every replica and displays them in a single output.
+
+By default, Docker configures services to use the json-file log friver, but other divers exist, including:
+- awslogs
+- gelf
+- gcplogs
+- journald
+- splunk
+- syslogs
 
 ### Deploying an manage an app on swarm
 
@@ -252,7 +363,7 @@ Swarm lets you create and manage services in two ways:
 - __Imperatively__: This means that it uses the command line
 - __Declaratively__: This means with a Compose file
 
-The correct way its declaratively because it defines a file on which actions can be declared and replicated however it will be seen both approaches.
+The correct way its declaratively because it defines a file on which actions can be declared and replicated but since this is an introductory chapter (and the imperative system allows phasing of actions) we will only address the imperative system.
 
 #### Example imperatively
 
@@ -300,16 +411,106 @@ d5cea5672cb0   joeyratt/webpage:latest   "python3 -m flask --…"   2 minutes ag
 fabd9e47f458   portainer/portainer-ce    "/portainer"             2 hours ago     Up 2 hours     8000/tcp, 9443/tcp, 0.0.0.0:9000->9000/tcp, [::]:9000->9000/tcp   portainer
 ```
 
+##### Checking if the service works
+
 If we look back, exercise 2 created a web page. This means that the web-fe service created in the swarm is a web page. We will be able to access it from the browser if we launch the request to one of the IPs of the virtual machines in multipass.
 
 - ![image](./static/7-swarm/accessing-web-fe.png)
 
-##### Notes about the desired state
+Like we have told in the [services](#services) section you can get the full details of the service with the prompt  `docker service inspect --pretty web-fe`.
 
-Even if the action is been done imperatively the stated is saved in the cluster store. __Swarm will run reconciliation loop that constantly compares the observed state of the cluster with the desired state__. When the two state matches, the world is a happy place, and no further action is needed. When they don't match, Swarm takes action to bring the observed state into line with desired state. 
+Here is an example of the execution:
+```bash
+ubuntu@manager1:~$ docker service inspect --pretty web-fe
 
-For example, if a worker hosting one fo the five replicas fails, the observed state of the cluster will drop from 5 replicas to 4 and no longer match the desired state of 5. As soon as the swarm observes the difference, it will start a new replica to bring the observed state back in line with desired state.
+ID:		d9vjcml3dr0iavdfb9gff4xps
+Name:		web-fe
+Service Mode:	Replicated
+ Replicas:	5
+Placement:
+UpdateConfig:
+ Parallelism:	1
+ On failure:	pause
+ Monitoring Period: 5s
+ Max failure ratio: 0
+ Update order:      stop-first
+RollbackConfig:
+ Parallelism:	1
+ On failure:	pause
+ Monitoring Period: 5s
+ Max failure ratio: 0
+ Rollback order:    stop-first
+ContainerSpec:
+ Image:		joeyratt/webpage:latest@sha256:c2a542df76b9f3d41b1895f9ed6c8632f49aa9e5644cddb4ea2c285600d2adf7
+ Init:		false
+Resources:
+Endpoint Mode:	vip
+Ports:
+ PublishedPort = 5000
+  Protocol = tcp
+  TargetPort = 5000
+  PublishMode = ingress 
+```
 
+##### Deleting the service
+
+At this point we can confirm that we have a swarm cluster with 1 manager and 1 worker which exposes a web page accessible from the cluster.
+
+Since we will reuse the cluster it will only be necessary to delete the service created with the command `docker service rm web-fe`.
+
+Below is an example of the execution of this command:
+```bash
+ubuntu@manager1:~$ docker service ls    # LISTING ALL SERVICES
+ID             NAME      MODE         REPLICAS   IMAGE                     PORTS
+d9vjcml3dr0i   web-fe    replicated   5/5        joeyratt/webpage:latest   *:5000->5000/tcp
+ubuntu@manager1:~$ docker service ps web-fe     # LISTING ALL REPLICAS FOR A CONCRETE SERVICE
+ID             NAME           IMAGE                     NODE      DESIRED STATE   CURRENT STATE            ERROR     PORTS
+yplmz7e3wtkd   web-fe.1       joeyratt/webpage:latest   worker1   Running         Running 2 minutes ago              
+t8tihwt284f6    \_ web-fe.1   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+komqbaf2ftoj    \_ web-fe.1   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+vsngxuzydllj    \_ web-fe.1   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+14ko5y4bljam   web-fe.2       joeyratt/webpage:latest   worker1   Running         Running 2 minutes ago              
+q3uyvc57xkz9    \_ web-fe.2   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+1kdl2cgu90cz    \_ web-fe.2   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+oeyvfh7ag10c    \_ web-fe.2   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+ir2orhlcjbgl   web-fe.3       joeyratt/webpage:latest   worker1   Running         Running 2 minutes ago              
+bvv7gr8cbjdg    \_ web-fe.3   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+2yfes7khyiro    \_ web-fe.3   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+t6imh8h7u00t    \_ web-fe.3   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+s2mj4k7oa9m2   web-fe.4       joeyratt/webpage:latest   worker1   Running         Running 2 minutes ago              
+yov6wyfzqoca    \_ web-fe.4   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+8k6uy3tsx8n9    \_ web-fe.4   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+z25f55wgxklq    \_ web-fe.4   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+9rx807a15hyj   web-fe.5       joeyratt/webpage:latest   worker1   Running         Running 2 minutes ago              
+llx53sylzkzd    \_ web-fe.5   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+me6shdqj6njf    \_ web-fe.5   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+zowe7mxpnxga    \_ web-fe.5   joeyratt/webpage:latest   worker1   Shutdown        Shutdown 2 minutes ago             
+# NOTE: SWARM KEEPS TRACK OF THE REPLICAS THAT HAVE BEEN SHUTED DOWN
+ubuntu@manager1:~$ docker service rm web-fe # REMOVING WEB-FE SERVICE
+web-fe
+# HERE IS BEEN CHECK THAT THE SERVICE WEB-FE DOESN'T EXIST ANYMORE
+ubuntu@manager1:~$ docker service ls
+ID        NAME      MODE      REPLICAS   IMAGE     PORTS
+ubuntu@manager1:~$ docker service ps web-fe
+no such service: web-fe
+```
+
+If you want you can double check that the replicas of that service have been removed by checking the raised containers in the own worker node:
+```bash
+# BEFORE DELETING WEB-FE SERVICE
+ubuntu@worker1:~$ docker ps
+CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS         PORTS                                                             NAMES
+4b1fab2cb5be   joeyratt/webpage:latest   "python3 -m flask --…"   7 seconds ago   Up 2 seconds                                                                     web-fe.3.ir2orhlcjbgltdoz39923s5ne
+e828f419b199   joeyratt/webpage:latest   "python3 -m flask --…"   7 seconds ago   Up 2 seconds                                                                     web-fe.5.9rx807a15hyjbsish1870fnkw
+ef854182f65b   joeyratt/webpage:latest   "python3 -m flask --…"   7 seconds ago   Up 2 seconds                                                                     web-fe.2.14ko5y4bljam7aloncc1u2i2q
+99e46f2be918   joeyratt/webpage:latest   "python3 -m flask --…"   7 seconds ago   Up 2 seconds                                                                     web-fe.4.s2mj4k7oa9m2f8oma5jwi3y5v
+8259a05beaa3   joeyratt/webpage:latest   "python3 -m flask --…"   7 seconds ago   Up 2 seconds                                                                     web-fe.1.yplmz7e3wtkdgawzwkanhsqcu
+fabd9e47f458   portainer/portainer-ce    "/portainer"             15 hours ago    Up 7 seconds   8000/tcp, 9443/tcp, 0.0.0.0:9000->9000/tcp, [::]:9000->9000/tcp   portainer
+# AFTER DELETING WEB-FE SERVICE
+ubuntu@worker1:~$ docker ps
+CONTAINER ID   IMAGE                    COMMAND        CREATED        STATUS         PORTS                                                             NAMES
+fabd9e47f458   portainer/portainer-ce   "/portainer"   15 hours ago   Up 3 minutes   8000/tcp, 9443/tcp, 0.0.0.0:9000->9000/tcp, [::]:9000->9000/tcp   portainer
+```
 
 ---
 > [<- PREVIOUS CHAPTER](./6-compose.md) __|__ [NEXT CHAPTER ->](./8-stack.md)

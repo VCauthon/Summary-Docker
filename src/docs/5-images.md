@@ -39,7 +39,7 @@ Once the account has been generated, we must create a repository where the diffe
 
 Once we have generated our repository we can go back to our original task, i.e. public cowsay image. To do this we need to log in to Docker Hub via `docker login`.
 
-> NOTE: When executing this command, we will be shown the instructions to be able to log in.
+> __NOTE__: When executing this command, we will be shown the instructions to be able to log in.
 
 Once logged in we must include a new tag on our existing image (in case it is not displayed with the `docker images` command, go back to cowsay's [exercise](../exercises/0-the-first-image/README.md) to recreate it).
 
