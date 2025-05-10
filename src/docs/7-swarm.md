@@ -4,8 +4,31 @@
 ---
 
 
-## INDEX:
+## INDEX
 
+- [Introduction](#introduction)
+- [Building a swarm](#building-a-swarm)  
+  - [Pre requisites (Multipass)](#pre-requisites-multipass)  
+  - [Building your docker nodes](#building-your-docker-nodes)  
+  - [Troubleshooting](#troubleshooting)  
+  - [Initializing a new swarm](#initializing-a-new-swarm)  
+  - [Joining workers into the swarm](#joining-workers-into-the-swarm)  
+- [Notes about the swarm](#notes-about-the-swarm)  
+  - [Swarm manager high availability](#swarm-manager-high-availability)  
+  - [Communication problems between clusters in a swarm](#communication-problems-between-clusters-in-a-swarm)  
+  - [Locking a swarm](#locking-a-swarm)  
+  - [Services](#services)  
+    - [Replicated vs global services](#replicated-vs-global-services)  
+    - [Scaling services](#scaling-services)  
+    - [Deleting services](#deleting-services)  
+  - [Dedicated manager nodes](#dedicated-manager-nodes)  
+  - [The desired state](#the-desired-state)  
+  - [Rollouts](#rollouts)  
+  - [Service logs](#service-logs)  
+- [Deploying and manage an app on swarm](#deploying-and-manage-an-app-on-swarm)  
+  - [Example imperatively](#example-imperatively)  
+  - [Checking if the service works](#checking-if-the-service-works)  
+  - [Deleting the service](#deleting-the-service)  
 
 ---
 
