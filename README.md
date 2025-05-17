@@ -1,34 +1,34 @@
 # Summary-Docker ヽ(￣ω￣(。。 )ゝ
 
 ## Introduction
-`Summary-Docker` is a personal exploration aimed at deepening my understanding of Docker and its myriad uses. This journey through Docker's functionalities and features has evolved into a guide designed to usher the community into the world of Docker. Whether you're just starting out or looking to refine your Docker skills, this project offers insights and practical advice to enhance your Docker experience.
+`Summary-Docker` is a personal journey into the depths of Docker. The project serves both as a learning tool and as a practical guide, evolving over time to cover core Docker topics and hands-on exercises. Whether you're new to Docker or revisiting concepts, this repo offers structured insights and real-world examples.
 
 ## Content
-- __Theory:__
-    1. [Introduction](./src/docs/0-introduction.md)
-    2. [Installation](./src/docs/1-installation.md)
-    3. [Image repository](./src/docs/2-image-repository.md)
-    4. [Containers](./src/docs/3-containers.md)
-    5. [Images](./src/docs/4-images.md)
-    6. [Debugging](./src/docs/5-debugging.md)
-    7. [Container network](./src/docs/6-network.md)
-    8. [Docker compose](./src/docs/7-docker-compose.md)
-    9. [Volumes](./src/docs/8-volumes.md)
-- __Exercises:__
-    - [http server](./src/exercises/1-http-server/README.md)
-    - [Data analysis](./src/exercises/2-data-analysis/README.md)
-    - [Data visualization (PENDING)](./src/exercises/3-data-visualization/README.md)
 
-## Sources
+### 🧠 Documentation
+1. [Introduction](./src/docs/1-introduction.md)
+2. [History](./src/docs/2-history.md)
+3. [Theory](./src/docs/3-theory.md)
+4. [Containers](./src/docs/4-containers.md)
+5. [Images](./src/docs/5-images.md)
+6. [Docker Compose](./src/docs/6-compose.md)
+7. [Docker Swarm](./src/docs/7-swarm.md)
+8. [Docker Stack](./src/docs/8-stack.md)
+9. [Network](./src/docs/9.network.md)
+
+### 🧪 Exercises
+- [The first image](./src/exercises/0-the-first-image/README.md)
+- [Generate a Redis instance](./src/exercises/1-generate-a-redis-instance/README.md)
+- [Generate a webpage](./src/exercises/2-generate-a-webpage/README.md)
+- [Webpage communicates with Redis](./src/exercises/3-webpage-communicates-with-redis/README.md)
+- [Using Docker Compose](./src/exercises/4-compose/README.md)
+- [Using Docker Stack](./src/exercises/5-stack/README.md)
+
+## 📚 Sources
+- [Docker Deep Dive by Nigel Poulton](https://www.amazon.es/Docker-Deep-Dive-Nigel-Poulton/dp/1916585256/) - Special thanks
 - [TechWorld with Nana - Docker Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=pg19Z8LL06w)
 - [TechWorld with Nana - Docker Tutorial for Beginners](https://www.youtube.com/watch?v=3c-iBn73dDE)
-- [Docker Deep Dive](https://www.amazon.es/Docker-Deep-Dive-Nigel-Poulton/dp/1916585256/ref=sr_1_1?adgrpid=59660793271&hvadid=712240779580&hvdev=c&hvlocphy=9181150&hvnetw=g&hvqmt=e&hvrand=14177040242523783112&hvtargid=kwd-375282831066&hydadcr=6381_2379727&mcid=5f2113140c003203aee8a04ca519ca64&sr=8-1)
 - [Official Docker Documentation](https://docs.docker.com/)
-- [Docker Hub](https://hub.docker.com/)
-- [Terraform: Up and Running](https://www.oreilly.com/library/view/terraform-up-and/9781098116736/)
-- [Wikipedia OS-level virtualization](https://en.m.wikipedia.org/wiki/OS-level_virtualization)
+- [Wikipedia: OS-level virtualization](https://en.m.wikipedia.org/wiki/OS-level_virtualization)
 - [Programacionymas](https://programacionymas.com/blog/docker-diferencia-entrypoint-cmd)
-- [Docker swarm with virtual machines using multipass](https://dev.to/mattdark/docker-swarm-with-virtual-machines-using-multipass-39b0)
-
-# TODO: Update the readme
-# TODO: Move the files from new to docs
+- [Docker Swarm with Virtual Machines using Multipass](https://dev.to/mattdark/docker-swarm-with-virtual-machines-using-multipass-39b0)
