@@ -75,7 +75,7 @@ services:                               # Defines the number of services (contai
   web:
     build: .                 # This container will be created with a concrete Dockerfile
     ports:
-      - "8080:80"                       # Opened port
+      - "8080:80"                       # Maps the port with which the user can access the container and the port where the request will be received
     volumes:
       - ./html:/usr/share/nginx/html    # Volumes defined
     networks:
