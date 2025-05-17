@@ -4,8 +4,14 @@
 ---
 
 
-## INDEX:
-- 
+## INDEX
+- [Introduction](#introduction)  
+- [Prepare environment](#prepare-environment)  
+  - [Hands on](#hands-on)  
+    - [Looking closer at the stack file](#looking-closer-at-the-stack-file)  
+      - [Network](#network)  
+      - [Ports](#ports)  
+      - [Services](#services)  
 
 ---
 
