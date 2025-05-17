@@ -1,4 +1,4 @@
-# Summary-Docker ヽ(￣ω￣(。。 )ゝ
+# Summary-Docker
 
 ## Introduction
 `Summary-Docker` is a personal journey into the depths of Docker. The project serves both as a learning tool and as a practical guide, evolving over time to cover core Docker topics and hands-on exercises. Whether you're new to Docker or revisiting concepts, this repo offers structured insights and real-world examples.
