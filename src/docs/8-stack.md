@@ -13,12 +13,14 @@
 
 Docker stacks combine [compose](./6-compose.md) and [swarm](7-swarm.md) to create a platform for easy deployment and management of complex multi-container apps on secure, highly available infrastructure.
 
+> __NOTE__: With docker stack you can create infrastructure in a declarative way
+
 You build a swarm, define your apps in Compose file, and deploy and manage them with the docker `stack command`.
 
 From an architecture perspective, __stacks are at the top of the Docker application hierarchy__ - they build on top of services, which in turn build on top of containers, and they only run on swarms.
 
 > __TERMINOLOGY__: Throughout this chapter, we'll use the term service to refer to the Docker service object that manages one or more identical containers on a swarm. We'll also refer to the _Compose_ file as the _stack file_, and sometimes we'll refer to the application as the _stack_.
-
+    
 ### Prepare environment
 
 If you already have a swarm you can continue, otherwise visit the following section to know how to create it.
@@ -58,9 +60,95 @@ In this section we will see how we can deploy the solution created in [exercise 
 
 ##### Looking closer at the stack file
 
-Stack files are identical to Compose files with a fe differences at run-time. For example Docker Compose lets you build images at run-time, but Docker Stack don't.
+Stack files are identical to Compose files with a few differences at run-time. __For example Docker Compose lets you build images at run-time, but Docker Stack don't__.
 
 Let's look at the networking elements defined in the [stack file](../exercises/4-compose/compose.yaml).
+
+In it we can see the following:
+- Two services (called webpage and redis-db)
+- A network (called webpage-redis-network)
+- A volume (called volumes-count)
+- The webpage is been published in the port 5000
+
+This infrastructure can be defined as the following
+
+![image](./static/8-stack/solution_stack.png)
+
+For the final solution to work, it will not be enough to use the original docker compose file, but we will have to include in the same file all the functionalities that swarm expects.
+
+The functionalities that must be included are the following:
+
+###### Network
+
+At the network level, we will have to indicate the type of network, specifically, we will use the overlay type. The purpose of this is to make the network visible from the different nodes.
+
+This can be configured with the following settings:
+```yaml
+<Snip>
+network:
+    name-network:
+        driver: overlay
+        driver_opts: # <=== Optionally you can encrypt the network paying a cost of 10% (approximately) in performance
+            encrypted: 'yes'
+<Snip>
+```
+
+###### Ports
+
+Taking into account that the service with the web page will be public in different replicas, it is necessary to include the following changes:
+- Indicate the port where the service will listen
+- Indicate the port where the mirrors will be listening
+
+This can be configured with the following settings:
+```yaml
+services:
+  service-name:
+    <Snip>
+    ports:
+      - target: 5001    # Service replica listen on this port
+        published: 5000     # Published externally on this replica
+    <Snip>
+```
+
+###### Services
+
+This is where a large part of the action lies, as we will have to indicate how the service will act when managing its replicas.
+
+Here is an example of the points that should be included in the configuration of the service.
+
+```yaml
+<Snipe>
+services:
+  service-name:
+    image: docker-image # The image on which the solution can be created (take into account that stack doesn't build images in run-time like compose)
+    command: python app.py # Command executed into each replica
+    deploy:                # Configuration of each replica
+      replicas: 4
+      update_config:
+        parallelism: 2
+        delay: 10s
+        failure_action: rollback
+      placement:           # Forces on which type of node will the replicas be created
+        constraints:
+          - 'node.role == worker'
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    networks:
+      - counter-net
+    ports:
+      - published: 5001
+        target: 8080
+    volumes:
+      - type: volume
+        source: counter-vol
+        target: /app
+<Snipe>
+```
+
+> __NOTE__: We have not gone into too much detail as most of the fields configured in the service are similar to those seen in the swarm chapter
 
 ---
 > [<- PREVIOUS CHAPTER](./7-swarm.md) __|__ [NEXT CHAPTER ->](./9.network.md)

@@ -1,0 +1,42 @@
+services:
+  webpage:
+    image: joeyratt/webpage-redis:latest
+    command: python3 -m flask --app=src run --host=0.0.0.0 --port=5001
+    environment:
+      REDIS_HOST: "redis-db"
+    deploy:
+      replicas: 4
+      update_config:
+        parallelism: 2
+        delay: 10s
+        failure_action: rollback
+      placement:
+        constraints:
+          - 'node.role == worker' 
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    networks:
+      - webpage-redis-network  
+    ports:
+      - target: 5001
+        published: 5000
+    volumes:
+      - type: volume
+        source: volumes-count
+        target: /app
+  redis-db:
+    image: "redis/redis-stack:latest"
+    networks:
+      - webpage-redis-network
+
+networks:
+  webpage-redis-network:
+    driver: overlay
+    driver_opts:
+      encrypted: 'yes'
+
+volumes:
+  volumes-count:
