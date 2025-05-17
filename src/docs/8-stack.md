@@ -12,6 +12,7 @@
       - [Network](#network)  
       - [Ports](#ports)  
       - [Services](#services)  
+    - [Load balancer](#load-balancer)
 
 ---
 
@@ -155,6 +156,12 @@ services:
 ```
 
 > __NOTE__: We have not gone into too much detail as most of the fields configured in the service are similar to those seen in the swarm chapter
+
+##### Load balancer
+
+Swarm supports two ways of publishing services to external clients:
+- Ingress mode (default): External clients can access ingress mode service via any swarm node - even nodes not hosting a service replica. 
+- Host mode: The port is bound only on nodes running the container.
 
 ---
 > [<- PREVIOUS CHAPTER](./7-swarm.md) __|__ [NEXT CHAPTER ->](./9.network.md)
