@@ -1,6 +1,6 @@
 [__HOME__](../../README.md)
 
-> [<- PREVIOUS CHAPTER](./4-containers.md) __|__ [NEXT CHAPTER ->](./6-compose.md)
+> [⬅️ PREVIOUS CHAPTER](./3-containers.md) __|__ [NEXT CHAPTER ➡️](./5-compose.md)
 ---
 
 ## INDEX:
@@ -237,4 +237,4 @@ Anyway. The final production image is only 25 MB, much smaller than the 300MB+ b
 
 
 ---
-> [<- PREVIOUS CHAPTER](./4-containers.md) __|__ [NEXT CHAPTER ->](./6-compose.md)
+> [⬅️ PREVIOUS CHAPTER](./3-containers.md) __|__ [NEXT CHAPTER ➡️](./5-compose.md)

@@ -1,6 +1,6 @@
 [__HOME__](../../README.md)
 
-> [<- PREVIOUS CHAPTER](./1-introduction.md) __|__ [NEXT CHAPTER ->](./3-theory.md)
+> [NEXT CHAPTER ➡️](./2-theory.md)
 ---
 
 
@@ -98,4 +98,4 @@ Platform builders can pick the specific Moby tools they need to build their cont
 
 ---
 
-> [<- PREVIOUS CHAPTER](./1-introduction.md) __|__ [NEXT CHAPTER ->](./3-theory.md)
+> [NEXT CHAPTER ➡️](./2-theory.md)

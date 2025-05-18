@@ -1,11 +1,19 @@
 [__HOME__](../../README.md)
 
-> [<- PREVIOUS CHAPTER](./8-stack.md)
+> [⬅️ PREVIOUS CHAPTER](./7-stack.md)
 ---
 
 
 ## INDEX:
-- 
+- [Introduction](#introduction)  
+  - [Docker networking theory](#docker-networking-theory)  
+    - [The Container Network Model](#the-container-network-model)  
+    - [Libnetwork](#libnetwork)  
+    - [Driver](#driver)  
+  - [Types of networks](#types-of-networks)  
+    - [Bridge](#bridge)  
+    - [Overlay](#overlay)  
+  - [Trouble shooting](#trouble-shooting)
 
 ---
 
@@ -66,4 +74,4 @@ The following are several commands that can help in the inspection of a network.
 - `docker port <container>`: Checks the exposed interface from a container
 
 ---
-> [<- PREVIOUS CHAPTER](./8-stack.md)
+> [⬅️ PREVIOUS CHAPTER](./7-stack.md)

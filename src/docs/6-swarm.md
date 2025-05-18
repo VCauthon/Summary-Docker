@@ -1,6 +1,6 @@
 [__HOME__](../../README.md)
 
-> [<- PREVIOUS CHAPTER](./6-compose.md) __|__ [NEXT CHAPTER ->](./8-stack.md)
+> [⬅️ PREVIOUS CHAPTER](./5-compose.md) __|__ [NEXT CHAPTER ➡️](./7-stack.md)
 ---
 
 
@@ -536,4 +536,4 @@ fabd9e47f458   portainer/portainer-ce   "/portainer"   15 hours ago   Up 3 minut
 ```
 
 ---
-> [<- PREVIOUS CHAPTER](./6-compose.md) __|__ [NEXT CHAPTER ->](./8-stack.md)
+> [⬅️ PREVIOUS CHAPTER](./5-compose.md) __|__ [NEXT CHAPTER ➡️](./7-stack.md)

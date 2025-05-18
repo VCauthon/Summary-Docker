@@ -1,6 +1,6 @@
 [__HOME__](../../README.md)
 
-> [<- PREVIOUS CHAPTER](./2-history.md) __|__ [NEXT CHAPTER ->](./4-containers.md)
+> [⬅️ PREVIOUS CHAPTER](./1-history.md) __|__ [NEXT CHAPTER ➡️](./3-containers.md)
 ---
 
 ## INDEX:
@@ -342,4 +342,4 @@ You can use the following docker scout to get all the vulnerability in an image:
 > __NOTE__: This functionality has to be installed apart if you're not using docker desktop.
 
 ---
-> [<- PREVIOUS CHAPTER](./2-history.md) __|__ [NEXT CHAPTER ->](./4-containers.md)
+> [⬅️ PREVIOUS CHAPTER](./1-history.md) __|__ [NEXT CHAPTER ➡️](./3-containers.md)

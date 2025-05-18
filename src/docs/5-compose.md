@@ -1,6 +1,6 @@
 [__HOME__](../../README.md)
 
-> [<- PREVIOUS CHAPTER](./5-images.md) __|__ [NEXT CHAPTER ->](./7-swarm.md)
+> [⬅️ PREVIOUS CHAPTER](./4-images.md) __|__ [NEXT CHAPTER ➡️](./6-swarm.md)
 ---
 
 ## INDEX:
@@ -124,4 +124,4 @@ Docker then starts the webpage, mounts the volume, and connects to the network. 
 In [this exercise](../exercises/4-compose/README.md) you will create a compose.yaml that defines the solution.
 
 ---
-> [<- PREVIOUS CHAPTER](./5-images.md) __|__ [NEXT CHAPTER ->](./7-swarm.md)
+> [⬅️ PREVIOUS CHAPTER](./4-images.md) __|__ [NEXT CHAPTER ➡️](./6-swarm.md)

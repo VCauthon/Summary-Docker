@@ -1,6 +1,6 @@
 [__HOME__](../../README.md)
 
-> [<- PREVIOUS CHAPTER](./7-swarm.md) __|__ [NEXT CHAPTER ->](./9.network.md)
+> [⬅️ PREVIOUS CHAPTER](./6-swarm.md) __|__ [NEXT CHAPTER ➡️](./8-network.md)
 ---
 
 
@@ -164,4 +164,4 @@ Swarm supports two ways of publishing services to external clients:
 - Host mode: The port is bound only on nodes running the container.
 
 ---
-> [<- PREVIOUS CHAPTER](./7-swarm.md) __|__ [NEXT CHAPTER ->](./9.network.md)
+> [⬅️ PREVIOUS CHAPTER](./6-swarm.md) __|__ [NEXT CHAPTER ➡️](./8-network.md)
