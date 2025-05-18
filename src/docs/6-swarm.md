@@ -291,7 +291,7 @@ Swarm has two modes for deploying replicas to nodes:
 - __Replicated (default)__: Deploys as many replicas as you need and attempts to distribute them evenly across available nodes.
 - __Global__: Deploys a single replica on every available node in the swarm
 
-> Both modes respect node availability and will only deploy replicas to eligible nodes. For example, if you don't allow your swarm to deploy applications to managers, both modes will only deploy to workers
+> __NOTE__: Both modes respect node availability and will only deploy replicas to eligible nodes. For example, if you don't allow your swarm to deploy applications to managers, both modes will only deploy to workers
 
 To enable one or other, you must specify the `--mode` flag when creating a service.
 

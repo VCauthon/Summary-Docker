@@ -44,7 +44,7 @@ You then tell Docker to run the app in the container.
 
 ![image](../docs/static/3-theory/the_swarm.png)
 
-> VM Tax, one of the biggest problems with the virtual machine model is that you need to install an OS on every VM - every OS consumes CPU, RAM, and storage and take a relatively long time to boot. __Containers get around all of this by sharing a single OS on the host they're running on__.
+> __NOTE__: VM Tax, one of the biggest problems with the virtual machine model is that you need to install an OS on every VM - every OS consumes CPU, RAM, and storage and take a relatively long time to boot. __Containers get around all of this by sharing a single OS on the host they're running on__.
 
 ### Docker engine
 
@@ -73,7 +73,7 @@ The daemon can expose the API on a local socket or over the network.
 - `LINUX`: The socket is in `/var/run/docker.sock` 
 - `WINDOWS`: The socket is in `\pipe\docker_engine`
 
-> When using Linux, sometimes, we have to give privileges to that socket to allow the sending of requests by the Docker engine. This is why, in some distros, we have to execute the command `sudo chmod 666 /var/run/docker.sock` to allow the use of Docker in the current computer.
+> __NOTE__: When using Linux, sometimes, we have to give privileges to that socket to allow the sending of requests by the Docker engine. This is why, in some distros, we have to execute the command `sudo chmod 666 /var/run/docker.sock` to allow the use of Docker in the current computer.
 
 The daemon receives the request, interprets it as a request to create a new container and passes it to containerd. Remember that the daemon doesn't contain any code to create containers. __runc interface with the OS kernel to pull together all the constructs necessary to create a container__.
 
@@ -102,7 +102,7 @@ The image is read-only in this relationship, but each container is read-write. D
 
 Each of these read-write layers are owned by the container. This allows the containers to have their own individuality as each one manages its own layers.
 
-> Images are like classes. You can create one or more objects from a class, whereas you can create one or more containers from an image. 
+> __NOTE__: Images are like classes. You can create one or more objects from a class, whereas you can create one or more containers from an image. 
 
 #### Layers
 
@@ -192,7 +192,7 @@ Status: Downloaded newer image for ghcr.io/regclient/regsync:latest
 ghcr.io/regclient/regsync:latest
 ```
 
-> As you can see the daemon was able to pull the image without any issues. This is because the registry GHCR supports the OCI registry-spec as mentioned earlier. 
+> __NOTE__: As you can see the daemon was able to pull the image without any issues. This is because the registry GHCR supports the OCI registry-spec as mentioned earlier. 
 
 ###### Multiple tags
 
@@ -221,7 +221,7 @@ This means that if an image is patched and redeployed with the same tag, newer u
 
 As it has been stated before. Images are formed by layers and these can be identified with an unique hash. This hash gives an unique identification of it.
 
-> An image has its own hash and layers too!
+> __NOTE__: An image has its own hash and layers too!
 
 Layers can be expected using the following commands:
 - `docker images --digest {image_name}`: Gives the hash of an image
@@ -236,7 +236,7 @@ Consider the following oversimplified example of building a simple Python applic
 
 - ![image](../docs/static/3-theory/stack_images.png)
 
-> Remember that this is an oversimplified example
+> __NOTE__: Remember that this is an oversimplified example
 
 It's important to understand that an image is the combination of all layers stacked in the order they were built.
 

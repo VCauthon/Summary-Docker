@@ -44,7 +44,7 @@ Linux containers are all based on the virtualization, isolation, and resource ma
 
 Although the word container most commonly refers to OS-level virtualization, it is sometimes used to refer to fuller virtual machines operating in varying degrees of concert with the host OS, such as Microsoft's Hyper-V containers.
 
-> NOTES: For an overview of virtualization since 1960, see [Timeline of virtualization technologies](https://en.m.wikipedia.org/wiki/Timeline_of_virtualization_technologies).
+> __NOTE__: For an overview of virtualization since 1960, see [Timeline of virtualization technologies](https://en.m.wikipedia.org/wiki/Timeline_of_virtualization_technologies).
 
 On ordinary operating systems for personal computers, a computer program can see (even though it might not be able to access) all the system's resources.
 

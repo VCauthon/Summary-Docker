@@ -24,7 +24,7 @@ You can think of an image like a frozen VM. __Each time you generate an instance
 
 Based on the graphic we can say that the containers: container1, container2 and container3. They are independent instances of the image on which they have been generated. When we say independent is because each container contains its files, its configuration and these changes will persist in the future until we do not delete the container itself.
 
-> Although it should be noted that accessing and configuring containers is an anti-pattern, since the containers must be state-less.
+> __NOTE__: Although it should be noted that accessing and configuring containers is an anti-pattern, since the containers must be state-less.
 
 ## How containers start apps
 
@@ -35,7 +35,7 @@ There are three ways you can tell Docker how to start an app in a container.
     - `CMD`: additional arguments that can be included when running a Docker image.
 - `CLI`: The arguments sent through the CLI.
 
-> If the `ENTRYPOINT` isn't set then Docker it will run its default execution that its `/bin/bash -c` that will start a bash and then execute the `CMD`
+> __NOTE__: If the `ENTRYPOINT` isn't set then Docker it will run its default execution that its `/bin/bash -c` that will start a bash and then execute the `CMD`
 
 In the [following exercise](../exercises/0-the-first-image/README.md) the first image in Docker will be build and also we will learn more about the entry points.
 

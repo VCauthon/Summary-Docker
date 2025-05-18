@@ -135,7 +135,7 @@ default*      docker
  \_ default    \_ default       running   v0.20.0    linux/amd64 (+3)
 ```
 
-> Remember, a builder is an instance of BuildKit that will perform builds.
+> __NOTE__: Remember, a builder is an instance of BuildKit that will perform builds.
 
 You can create more builders that serve the creation of images in concrete platforms. This can be done with the following command:
 
