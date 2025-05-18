@@ -6,7 +6,7 @@
 
 ## INDEX:
 
-- [How docker came to be?](#how-docker-came-to-be)
+- [How did Docker come to be?](#how-did-docker-come-to-be)
     - [How to achieve process isolation in a container?](#how-to-achieve-process-isolation-in-a-container)
 - [Initiatives to promote and standardize containers](#initiatives-to-promote-and-standardize-containers)
     - [The Open Container Initiative](#the-open-container-initiative)
@@ -15,7 +15,7 @@
 
 ---
 
-### How docker came to be?
+### How did Docker come to be?
 
 Docker uses a system of OS-level virtualization that allows the kernel to isolate into multiple spaces.
 
@@ -35,7 +35,7 @@ A computer program running on an ordinary operating system can see all resources
 
 #### How to achieve process isolation in a container?
 
-On Unix-like operating systems, this feature can be seen as an advanced implementation of the standard chroot mechanism, which changes the apparent root folder for the current running process and its children. In addition to isolation mechanisms, the kernel often provides resource-management features to limit the impact of one container's activities on other containers.
+On Unix-like operating systems, this feature can be seen as an advanced implementation of the standard chroot mechanism, which changes the apparent root folder for the current running process and its children. In addition to isolation mechanisms, the kernel often provides resource-management features to limit the impact of one container’s activity on others.
 
 Linux containers are all based on the virtualization, isolation, and resource management mechanisms provided by the Linux kernel, notably:
 
@@ -57,7 +57,7 @@ The operating system may be able to allow or deny access to such resources based
 
 ![image](../docs/static/2-history/os_level_virtualization.png)
 
-__With operating-system-virtualization, or containerization, it is possible to run programs within containers, to which only parts of these resources are allocated__. A program expecting to see the whole computer, once run inside a container, can only see the allocated resources and believes them to be all that is available. Several containers can be created on each operating system, to each of which a subset of the computer's resources is allocated. Each container may contain any number of computer programs. These programs may run concurrently or separately, and may even interact with one another.
+__With operating-system-virtualization, or containerization, it is possible to run programs within containers, to which only parts of these resources are allocated__. A program expecting to see the whole computer, once run inside a container, can only see the allocated resources and believes them to be all that is available. Several containers can be created on each operating system to which a subset of the computer's resources is allocated. Each container may contain any number of computer programs. These programs may run concurrently or separately, and may even interact with one another.
 
 Containerization has similarities to application virtualization: In the latter, only one computer program is placed in an isolated container and the isolation applies to file system only.
 
@@ -74,7 +74,7 @@ Some history about OCI:
 - In response, CoreOS created an open standard called [`appc`](https://github.com/appc/spec) that defined specifications for things such as image format and container runtime.
 - The `appc` standard did things differently from Docker and put the ecosystem in an awkward position with two competing standards.
 - Competition is usually a good thing, competing standards are generally bad, as they generate confusion that slows down user adoption.
-- The main figures of `appc` then decided to came together and formed the OCI as a vendor-neutral lightweight council to govern containers standards.
+- The main figures of `appc` then decided to collaborated to form the OCI as a vendor-neutral lightweight council to govern containers standards.
 
 At the time of the writing the OCI maintains three standards called specs:
 - [The image-spec](https://github.com/opencontainers/image-spec): Creates and maintains the software shipping container image format spec
@@ -83,12 +83,14 @@ At the time of the writing the OCI maintains three standards called specs:
 
 #### [__The CNCF__](https://www.cncf.io/)
 
-It was founded in 2015 with the goal of _"...advancing container technologies... and making cloud native computing ubiquitous"_. Instead of creating and maintaining container-related specifications, the CNCF host important project such as `Kubernetes`, `containerd`, `Notary`, `Prometheus`, `Cilium`, and lots more.
+It was founded in 2015 with the goal of _"...advancing container technologies... and making cloud native computing ubiquitous"_. Instead of creating and maintaining container-related specifications, the CNCF host important projects such as `Kubernetes`, `containerd`, `Notary`, `Prometheus`, `Cilium`, and lots more.
 
-When we say the CNCF host these projects we mean it provides a space, structure, and support for projects to grow and mature. Fore example, all CNCF projects pass through the following three phases or stages:
-- Sandbox: Gives support to new ideas and projects to
-- Incubating: Gives the needed time to be production ready products
-- Graduated: They are ready for production adn are guaranteed to have strong governance.
+When we say the CNCF host these projects we mean it provides a space, structure, and support for projects to grow and mature.
+
+For example, all CNCF projects pass through the following three stages:
+1. __Sandbox__: Gives support to new ideas and projects to
+2. __Incubating__: Gives the needed time to be production ready products
+3. __Graduated__: They are ready for production and are guaranteed to have strong governance.
 
 #### [__The Moby Project__](https://mobyproject.org/)
 
