@@ -14,6 +14,8 @@
 
 # Containers - The TLDR
 
+Thr [chapter on images](./5-images.md) goes into more detail about what Docker images actually are, but for now we can stick with the following.
+
 Containers are run-time instances of images, and you can start one or more containers from a single image.
 
 You can think of an image like a frozen VM. __Each time you generate an instance of this image a separate container is generated__.
