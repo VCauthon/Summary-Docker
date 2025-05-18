@@ -53,19 +53,19 @@ Docker Engine is a jargon for the server-side components of Docker that run and 
 The Docker Engine is modular and built from many small specialized components pulled from projects such as the OCI, the CNCF, and the Moby project.
 
 At high level, there are two majors parts to the Docker platform:
-- __The CLI (client)__: The CLI is the familiar docker command-line tool for deploying and managing containers. It converts simple commands into API request and sends them to the engine.
+- __The CLI (client)__: The CLI is the familiar Docker command-line tool for deploying and managing containers. It converts simple commands into API request and sends them to the engine.
 - __The engine (server)__: Comprises all the service-side components that run and manage containers.
 
 - ![image](../docs/static/3-theory/cli_engine.png)
 
-From the image, and making more focus on the docker engine we can detect the following components:
+From the image, and making more focus on the Docker engine we can detect the following components:
 - __containerd__: Lifecycle management from all containers created 
 - __shim__: Its the process that will report the status of the container created
 - __runc__: Interface with the kernel and run the container at low-level runtime
 
 ### Communicating with the engine
 
-Docker defines in its docker engine an API on which using a CLI you can communicate with it.
+Docker defines in its Docker engine an API on which using a CLI you can communicate with it.
 
 When you run commands, the Docker client converts them into API requests and sends them to the API exposed by the daemon.
 
@@ -73,7 +73,7 @@ The daemon can expose the API on a local socket or over the network.
 - `LINUX`: The socket is in `/var/run/docker.sock` 
 - `WINDOWS`: The socket is in `\pipe\docker_engine`
 
-> When using Linux, sometimes, we have to give privileges to that socket to allow the sending of request by the docker engine. This is why, in some distros, we have to execute the command `sudo chmod 666 /var/run/docker.sock` to allow the use of docker in the current computer.
+> When using Linux, sometimes, we have to give privileges to that socket to allow the sending of request by the Docker engine. This is why, in some distros, we have to execute the command `sudo chmod 666 /var/run/docker.sock` to allow the use of Docker in the current computer.
 
 The daemon receives the request, interprets it as a request to create a new container and passes it to containerd. Remember that the daemon doesn't contain any code to create containers. __runc interface with the OS kernel to bull together all the constructs necessary to create a container__.
 
@@ -85,7 +85,7 @@ This can be summarized with the following image:
 Decoupling the container creation and management from the Docker daemon and implementing it in containerd and runc makes it possible to stop, restart, and even update the daemon without impacting running containers.
 
 In linux all the binaries of each component explained before are here:
-- `/usr/bin/dockerd`: The daemon from docker
+- `/usr/bin/dockerd`: The daemon from Docker
 - `/usr/bin/containerd`: containerd
 - `/usr/bin/containerd-shim-runc-v2`: The plugging used to connect container with runc (shim)
 - `/usr/bin/runc`: runc
@@ -120,7 +120,7 @@ Containers are designed to run a single application or microservice. As such, th
 
 ##### Local
 
-A clean Docker installation has an empty _local repository_. _Local repository_ is jargon for an area on your local machine where docker stores images for more convenient access. We sometimes call it the image cache, and on Linux its usually located in `/var/lib/docker/<storage-driver>`.
+A clean Docker installation has an empty _local repository_. _Local repository_ is jargon for an area on your local machine where Docker stores images for more convenient access. We sometimes call it the image cache, and on Linux its usually located in `/var/lib/docker/<storage-driver>`.
 
 The mentioned local repository can be seen with the following command:
 ```bash
@@ -161,7 +161,7 @@ The most popular one is `Docker Hub` but there are others like `Azure Container 
 
 ###### When pulling an image
 
-When pulling images from docker the engine states by default the following concepts:
+When pulling images from Docker the engine states by default the following concepts:
 - That you want to download the latest version of the image
 - That you want to download it from DockerHub
 

@@ -6,15 +6,14 @@
 ## Content
 
 ### 🧠 Documentation
-1. [Introduction](./src/docs/1-introduction.md)
-2. [History](./src/docs/2-history.md)
-3. [Theory](./src/docs/3-theory.md)
-4. [Containers](./src/docs/4-containers.md)
-5. [Images](./src/docs/5-images.md)
-6. [Docker Compose](./src/docs/6-compose.md)
-7. [Docker Swarm](./src/docs/7-swarm.md)
-8. [Docker Stack](./src/docs/8-stack.md)
-9. [Network](./src/docs/9.network.md)
+1. [History](./src/docs/1-history.md)
+2. [Theory](./src/docs/2-theory.md)
+3. [Containers](./src/docs/3-containers.md)
+4. [Images](./src/docs/4-images.md)
+5. [Docker Compose](./src/docs/5-compose.md)
+6. [Docker Swarm](./src/docs/6-swarm.md)
+7. [Docker Stack](./src/docs/7-stack.md)
+8. [Network](./src/docs/8-network.md)
 
 ### 🧪 Exercises
 - [The first image](./src/exercises/0-the-first-image/README.md)
