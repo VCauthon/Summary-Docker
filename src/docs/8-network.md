@@ -1,4 +1,4 @@
-[__HOME__](../../README.md)
+[__🧭 HOME__](../../README.md)
 
 > [⬅️ PREVIOUS CHAPTER](./7-stack.md)
 ---

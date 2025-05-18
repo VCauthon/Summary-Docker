@@ -1,4 +1,4 @@
-[__HOME__](../../README.md)
+[__🧭 HOME__](../../README.md)
 
 > [NEXT CHAPTER ➡️](./2-theory.md)
 ---

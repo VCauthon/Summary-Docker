@@ -1,4 +1,4 @@
-[__HOME__](../../README.md)
+[__🧭 HOME__](../../README.md)
 
 > [⬅️ PREVIOUS CHAPTER](./4-images.md) __|__ [NEXT CHAPTER ➡️](./6-swarm.md)
 ---
