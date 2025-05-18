@@ -5,9 +5,9 @@
 
 ## INDEX:
 - [Containers - The TLDR](#containers---the-tldr)
-- [How container start apps](#how-container-start-apps)
-- [Connecting into a docker image](#connecting-into-a-docker-image)
-- [The main process from a docker](#the-main-process-from-a-docker)
+- [How containers start apps](#how-container-start-apps)
+- [Connecting into a Docker image](#connecting-into-a-docker-image)
+- [The main process from a container](#the-main-process-from-a-container)
 - [Restart policies](#restart-policies)
 
 ---
@@ -26,7 +26,7 @@ Based on the graphic we can say that the containers: container1, container2 and 
 
 > Although it should be noted that accessing and configuring containers is an anti-pattern, since the containers must be state-less.
 
-## How container start apps
+## How containers start apps
 
 There are three ways you can tell Docker how to start an app in a container.
 
@@ -35,14 +35,14 @@ There are three ways you can tell Docker how to start an app in a container.
     - `CMD`: additional arguments that can be included when running a Docker image.
 - `CLI`: The arguments sent through the CLI.
 
-> If the `ENTRYPOINT` isn't set then docker it will run its default execution that its `/bin/bash -c` that will start a bash and then execute the `CMD`
+> If the `ENTRYPOINT` isn't set then Docker it will run its default execution that its `/bin/bash -c` that will start a bash and then execute the `CMD`
 
-In the [following exercise](../exercises/0-the-first-image/README.md) the first image in docker it will be build and also we will learn more about the entry points.
+In the [following exercise](../exercises/0-the-first-image/README.md) the first image in Docker will be build and also we will learn more about the entry points.
 
-All the configurations (like entrypoints) from an image can be seen using the command `inspect`. For example, lets inspect the image we have build in the last exercise and lets find the `ENTRYPOINT` and its `CMD`.
+All the configurations (like entrypoints) from an image can be seen using the command `inspect`. For example, let's inspect the image we have build in the last exercise and lets find the `ENTRYPOINT` and its `CMD`.
 
 ```bash
-docker inspect cowsay                                                                                            ──(Sun,Mar16)─┘
+docker inspect cowsay
 <snip>
             "Cmd": [
                 "phenomenal"
@@ -58,10 +58,10 @@ docker inspect cowsay                                                           
 <snip>
 ```
 
-## Connecting into a docker image
+## Connecting into a Docker image
 
 You can use the `docker exec` command to execute commands in running containers, and it has two modes:
-- __Interactive__: Connect your terminal to a shell process in the container and behave like remote a SSH session.
+- __Interactive__: Connect your terminal to a shell process in the container and behaves like a remote SSH session.
 - __Remote execution__: Lets you send commands to a running container and prints the output to your local terminal.
 
 You can try it connecting into the image `cowsay` done in the last exercise but changing the entrypoint to make `bin/bash` run
@@ -82,9 +82,9 @@ root@79168839daff:/# cowsay yo again
 root@79168839daff:/# 
 ```
 
-The started session can be terminated using the prompt exit.
+The started session can be terminated using the `exit` command.
 
-## The main process from a docker
+## The main process from a container
 
 Most containers only run a single process. This is the container's main app process and is always PID 1. This can be seen running the command `ps` in your container.
 
@@ -93,7 +93,7 @@ You can run alpine to test what has been told:
 docker run -it alpine sh
 ```
 
-> __NOTE__: Notice that the command sent to the docker container to start a session isn't /bin/bash. Instead of that it's sh. Thats because that image doesn't have the same shell.
+> __NOTE__: Notice that the command sent to the Docker container to start a session isn't /bin/bash. Instead of that it's sh. Thats because that image doesn't have the same shell.
 
 Once you have started your session you can run the command ps and this is what you'll see:
 ```bash
@@ -103,7 +103,7 @@ PID   USER     TIME  COMMAND
     7 root      0:00 ps
 ```
 
-> __NOTE__: Not all base images has the command ps or the ability to create sessions. Take this in mind.
+> __NOTE__: Not all base images have the `ps` command or the ability to create sessions. Take this in mind.
 
 Each of PID belongs to the following process:
 | __PID__ | __BELONGS TO__ |
@@ -111,7 +111,7 @@ Each of PID belongs to the following process:
 | 1   | The running terminal |
 | 7   | The last ps command executed |
 
-> If you kill the docker main process the container will be stopped
+> If you kill the Docker main process the container will be stopped
 
 Looking at the running processes we can say that once the terminal terminates the container will die.
 
@@ -129,7 +129,7 @@ docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
-In the last section we can see that there is no longer any container running, however, if we do a `docker ps -a` we can see our previous container called `exciting_yonath`.
+In the last section we can see that there is no longer any container running, however, if we run `docker ps -a` we can see our previous container called `exciting_yonath`.
 ```bash
 docker ps -a
 CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                        PORTS     NAMES
@@ -141,14 +141,14 @@ c69d4e2584d6   alpine    "sh"                     11 minutes ago   Exited (0) 4 
 Container restart policies are a simple form of self-healing that allows the local Docker Engine to automatically restart failed containers.
 
 The existing conditions that can trigger a restart policy are the following:
-- `no` (default): Containers never restarts automatically
+- `no` (default): Containers never restart automatically
 - `on-failure`: Will restart if the container exits with a non-zero status
 - `always`: It will always restart
-- `unless-stopped`: It will always restart unless manually is stopped by the user
+- `unless-stopped`: It will always restart unless manually stopped by the user
 
-> __NOTE__: If the Daemon is been restarted all containers will be restarted (unless the `no` or `unless-stopped` condition)
+> __NOTE__: If the Daemon is restarted all containers will be restarted (unless the `no` or `unless-stopped` condition)
 
-This conditions can be set when running a container. For example, and using the `alphine` base image we have saw before.
+This conditions can be set when running a container. For example, and using the `alpine` base image we saw earlier.
 
 As far as we know, the `alpine` image does not have any processes running. This causes it to terminate if we run it on its own (in the previous case it did not terminate because our own sh session kept it alive).
 
@@ -161,13 +161,13 @@ docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
-However, if we add the restart policy `always` the container will keep raising up even when starting it will cause to get stopped.
+However, if we add the restart policy `always` the container will keep restarting even when starting it will cause to get stopped.
 
 This can be seen in the following:
 ```bash
-# Starting a docker with a restart policy
+# Creating a container with a restart policy
 docker run --restart always alpine
-# The docker has started
+# The Ctonainer is started
 docker ps
 CONTAINER ID   IMAGE     COMMAND     CREATED         STATUS                                  PORTS     NAMES
 07ebeca5db30   alpine    "/bin/sh"   4 seconds ago   Restarting (0) Less than a second ago             cool_satoshi
