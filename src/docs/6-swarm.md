@@ -9,7 +9,7 @@
 - [Introduction](#introduction)
 - [Building a swarm](#building-a-swarm)  
   - [Pre requisites (Multipass)](#pre-requisites-multipass)  
-  - [Building your docker nodes](#building-your-docker-nodes)  
+  - [Building your Docker nodes](#building-your-docker-nodes)  
   - [Troubleshooting](#troubleshooting)  
   - [Initializing a new swarm](#initializing-a-new-swarm)  
   - [Joining workers into the swarm](#joining-workers-into-the-swarm)  
@@ -25,7 +25,7 @@
   - [The desired state](#the-desired-state)  
   - [Rollouts](#rollouts)  
   - [Service logs](#service-logs)  
-- [Deploying and manage an app on swarm](#deploying-and-manage-an-app-on-swarm)  
+- [Deploying and managing an app on swarm](#deploying-and-managing-an-app-on-swarm)  
   - [Example imperatively](#example-imperatively)  
   - [Checking if the service works](#checking-if-the-service-works)  
   - [Deleting the service](#deleting-the-service)  
@@ -61,7 +61,7 @@ In this section, you'll build locally the following swarm cluster with 1 manager
 
 #### Pre requisites (Multipass)
 
-Given that locally we only have our own computer and that Swarm orchestrates different computers to work together, it will be necessary to set up virtual machines to simulate each of the computers we will need.
+Given that locally we only have our own computer and that Swarm orchestrates different computers to work together, it is necessary to set up virtual machines to simulate each of the computers we will need.
 
 To accomplish that you can use [Multipass](https://canonical.com/multipass/install).
 ```bash
@@ -74,9 +74,9 @@ To accomplish that you can use [Multipass](https://canonical.com/multipass/insta
 sudo snap install multipass
 ```
 
-#### Building your docker nodes
+#### Building your Docker nodes
 
-Once you have installed multipass we will need to create all the virtual machines that will sustain each of the nodes.
+Once you have installed multipass we will need to create all the virtual machines that will sustain each node.
 
 Each node will have the following specs:
 - 2 CPU
@@ -93,10 +93,10 @@ multipass launch docker --name worker1 --cpus 2 --disk 40G --memory 4G
 1. `error launch failed: multipass socket access denied`:
     - This error means that the socket used to allow your kernel to speak with multipass is protected. To give access to it you have to execute the following command `sudo chmod 666 /var/snap/multipass/common/multipass_socket`.
 2. `launch failed: KVM support is not enabled on this machine.`   
-    - The problem it will be that your BIOS doesn't have enabled virtualization.
-    - This means that you will have to enter it to enable it
+    - The problem is that your BIOS doesn't have enabled virtualization.
+    - This means that you will have to enter the BIOS to enable it
 
-You can check if the virtual machines have been created is done with the following command:
+You can check if the virtual machines have been created with the following command:
 ```bash
 multipass ls
 Name                    State             IPv4             Image
@@ -106,7 +106,7 @@ worker1                 Running           10.222.216.30    Ubuntu 24.04 LTS
                                           172.17.0.1
 ```
 
-Lastly, you can check that if multipass have correctly created the VM connecting to it and checking if it has docker installed.
+Lastly, you can check that if multipass has correctly created the VM connecting to it and checking if it has Docker installed.
 
 This can be done with the following commands:
 ```bash
@@ -126,15 +126,15 @@ This is accomplished with the following actions:
 2. Join additional managers
 3. Join workers
 
-The docker engine has the following modes:
+The Docker engine has the following modes:
 - `single-engine mode`: On which it runs regular containers
 - `swarm-mode`: On which can receive orders to execute containers as a swarm
 
-When a docker engine joins a swarm it enables the `swarm-mode`.
+When a Docker engine joins a swarm it enables the `swarm-mode`.
 
 Following the high level description defined above we will start creating the first manager of the swarm. This action will be done inside the VM that will be the manager (this means that we will have to use the command `multipass shell manager1`) and execute the command `docker swarm init` adding the IP on which the VM that will serve as a manager is reachable.
 
-> __NOTE__: We can identify the IP of the virtual machine using the command multipass ls and the port it will be `2377` which is the default port from docker to enable swarm communications
+> __NOTE__: We can identify the IP of the virtual machine using the command multipass ls and the port it will be `2377` which is the default port from Docker to enable swarm communications
 
 To accomplish this we will have to execute the following commands:
 ```bash
@@ -236,9 +236,9 @@ In the case of cluster isolation, neither side will be able to have a majority t
 
 Despite all of Swarm's security features, restarting an old manager or restoring an old backup can potentially compromise your cluster. For example, a malicious actor with access to an old manager node may be able to re-join it to the swarm and gain unwanted access.
 
-Fortunately, you can use Swarm's autolock feature to force restarted managers __to present a key before being admitted back into the swarm__.
+Fortunately, you can use Swarm's autolock feature to force restarted managers __to present themselves a key before being admitted back into the swarm__.
 
-You can autolock new swarms at build time by passing the `--autolock` flag to the docker `swarm init command`. For existing swarms, you can autolock them with the `docker swarm update` command
+You can autolock new swarms at build time by passing the `--autolock` flag to the Docker `swarm init command`. For existing swarms, you can autolock them with the `docker swarm update` command
 
 Here is an example of the output locking our own cluster:
 ```bash
@@ -257,18 +257,18 @@ Keep safe that token. Because if a manager is been restarted and needs to rejoin
 
 Once this command is been executed all your manager nodes that are restarted won't be able to access the swarm unless the swarm is unlock from each node.
 
-Here is an example where the swarm is unlock by a worker:
+Here is an example where the swarm is unlocked by a worker:
 ```bash
 docker swarm unlock SWMKEY-1-Llcid7CmlGQYMK+z0CoRiHBbEyWcUXyROjRNb4ObxNQ
 ```
 
 #### Services
 
-The functionalities that are exposed from a SWARM are known as services.
+The functionalities exposed by a SWARM are known as services.
 
 The following aspects are defined in a service:
 - Which image will be used to create containers
-- How many replicas (containers) will have to be erected to meet the demand for the service.
+- How many replicas (containers) will have to be created to meet the demand for the service.
 - On which ports the service will be exposed
 - What to do when a replica no longer provides the expected response.
 - What to do when demand is higher than expected.
@@ -293,13 +293,13 @@ Swarm has two modes for deploying replicas to nodes:
 
 > Both modes respect node availability and will only deploy replicas to eligible nodes. For example, if you don't allow your swarm to deploy applications to managers, both modes will only deploy to workers
 
-To enable one or other you have to define with the flag `--mode` it when creating a service.
+To enable one or other, you must specify the `--mode` flag when creating a service.
 
 ##### Scaling services
 
 Another powerful feature of services is the ability to scale them up and down by adding or removing replicas.
 
-Assume business is booming and your're experiencing double the number of requests to your web front-end. 
+Assume business is booming and you're experiencing double the number of requests to your web front-end. 
 
 You can scale the number of replicas with the following prompt:
 ```bash
@@ -308,7 +308,7 @@ docker service scale $(service-name)=$(number-of-replicas)
 
 ##### Deleting services
 
-Running the following command will remove the service from the swarm. This means that the apps that the services containers won't be longer available.
+Running the following command will remove the service from the swarm. This means that the apps in the service's containers will no longer be available.
 
 This can be done with the following command:
 ```bash
@@ -327,21 +327,21 @@ docker node update --availability drain manager1
 
 #### The desired state
 
-Even if the action is been done imperatively the stated is saved in the cluster store. __Swarm will run reconciliation loop that constantly compares the observed state of the cluster with the desired state__. When the two state matches, the world is a happy place, and no further action is needed. When they don't match, Swarm takes action to bring the observed state into line with desired state. 
+Even if the action is performed imperatively the state is saved in the cluster store. __Swarm will run reconciliation loop that constantly compares the observed state of the cluster with the desired state__. When the two states match, the world is a happy place, and no further action is needed. When they don't match, Swarm takes action to bring the observed state into line with desired state. 
 
-For example, if a worker hosting one fo the five replicas fails, the observed state of the cluster will drop from 5 replicas to 4 and no longer match the desired state of 5. As soon as the swarm observes the difference, it will start a new replica to bring the observed state back in line with desired state.
+For example, if a worker hosting one of the five replicas fails, the observed state of the cluster will drop from 5 replicas to 4 and no longer match the desired state of 5. As soon as the swarm observes the difference, it will start a new replica to bring the observed state back in line with desired state.
 
 #### Rollouts
 
-Application updates ar a fact of life, and for the longest time they were painful. I've personally lost more than enough weekends to major application updates and I've no intention of doing it again.
+Application updates are a fact of life, and for the longest time they were painful. I've personally lost more than enough weekends to major application updates and I've no intention of doing it again.
 
-Fortunately, tanks to Docker services, updating well-designed microservices apps is easy.
+Fortunately, thanks to Docker services, updating well-designed microservices apps is easy.
 
 > __NOTE__: We use terms like rollouts, updates, and rolling updates to mean the same thing. That is updating a live application.
 
 Swarm manages it all by itself when updating a service.
 
-For example, lets say that we want to change the image used by a service.
+For example, lets say we want to change the image used by a service.
 ```bash
 # Service created
 docker service create --name dummy \
@@ -359,16 +359,16 @@ docker service update \
 ```
 
 When executing this update swarm will remove each of the old replicas keeping one alive until the rollout is finish. From the update prompt there are the following things that have to be taken into account:
-- `--update-parallelism`: Only 2 rask will be updated at the same time
-- `--update-delay`: After a batch is been done wait 20 seconds before doing the next task
+- `--update-parallelism`: Only 2 tasks will be updated at the same time
+- `--update-delay`: After a batch is been done it waits 20 seconds and then starts again
 
-Swarm will waits for the new tasks to become healthy before shutting down the old ones.
+Swarm will wait for the new tasks to become healthy before shutting down the old ones.
 
 #### Service logs
 
-You can inspect a service' logs with the `docker service logs $(service-name)` command. It gathers the logs from every replica and displays them in a single output.
+You can inspect a service's logs with the `docker service logs $(service-name)` command. It gathers the logs from every replica and displays them in a single output.
 
-By default, Docker configures services to use the json-file log friver, but other divers exist, including:
+By default, Docker configures services to use the json-file log friver, but other drivers exist, including:
 - awslogs
 - gelf
 - gcplogs
@@ -376,17 +376,17 @@ By default, Docker configures services to use the json-file log friver, but othe
 - splunk
 - syslogs
 
-### Deploying an manage an app on swarm
+### Deploying and managing an app on swarm
 
 Swarm nodes can run regular containers, but they can also run enhanced containers called services. Each service takes a single container definition and augments it with cloud-native features such as self-healing, scaling, and automated rollouts and rollbacks.
 
-In this section, you'll deploy a simple web server as a swarm service an see how to scale it, perform rollouts, and delete it.
+In this section, you'll deploy a simple web server as a swarm service and see how to scale it, perform rollouts, and delete it.
 
 Swarm lets you create and manage services in two ways:
 - __Imperatively__: This means that it uses the command line
 - __Declaratively__: This means with a Compose file
 
-The correct way its declaratively because it defines a file on which actions can be declared and replicated but since this is an introductory chapter (and the imperative system allows phasing of actions) we will only address the imperative system.
+The correct way is declaratively because it defines a file on which actions can be declared and replicated but since this is an introductory chapter (and the imperative system allows phasing of actions) we will only address the imperative system.
 
 #### Example imperatively
 
@@ -401,7 +401,7 @@ docker service create --name web-fe \
     joeyratt/webpage:latest
 ```
 
-This is the result of the output:
+This is the output:
 ```bash
 ubuntu@manager1:~$ docker service create --name web-fe \
     -p 5000:5000 \
@@ -417,10 +417,10 @@ overall progress: 5 out of 5 tasks
 verify: Service d9vjcml3dr0iavdfb9gff4xps converged 
 ```
 
-If we have a similar results it can be stated that:
+If we have a similar results, it can be stated that:
 - The service `web-fe` has been created
 - Every swarm node exposes the port 5000 for each replica
-- There are created 5 replicas (containers) to supply the demand of this service 
+- Five replicas ha been created (containers) to supply the demand of this service 
 
 The last statement can be confirmed if we get inside the worker1 and list the running containers:
 ```bash
@@ -436,7 +436,7 @@ fabd9e47f458   portainer/portainer-ce    "/portainer"             2 hours ago   
 
 ##### Checking if the service works
 
-If we look back, exercise 2 created a web page. This means that the web-fe service created in the swarm is a web page. We will be able to access it from the browser if we launch the request to one of the IPs of the virtual machines in multipass.
+If we look back, exercise 2 created a web page. This means that the `web-fe` service is a web page. We will be able to access it from the browser if we launch the request to one of the IPs of the virtual machines in multipass.
 
 - ![image](./static/7-swarm/accessing-web-fe.png)
 
@@ -477,7 +477,7 @@ Ports:
 
 ##### Deleting the service
 
-At this point we can confirm that we have a swarm cluster with 1 manager and 1 worker which exposes a web page accessible from the cluster.
+At this point we can confirm that we have a swarm cluster with 1 manager and 1 worker which exposes a web page accessible via the cluster.
 
 Since we will reuse the cluster it will only be necessary to delete the service created with the command `docker service rm web-fe`.
 
