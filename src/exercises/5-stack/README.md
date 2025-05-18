@@ -74,7 +74,7 @@ Finally, you can access the web page published in the cluster through the IP of 
 
 ```bash
 # Checking the IPs from each node
-multipass ls                                                                                             ──(Sat,May17)─┘
+multipass ls
 Name                    State             IPv4             Image
 manager1                Running           10.222.216.226   Ubuntu 24.04 LTS
                                           172.17.0.1
